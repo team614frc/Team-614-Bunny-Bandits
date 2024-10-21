@@ -23,7 +23,6 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -49,9 +48,6 @@ public class SwerveSubsystem extends SubsystemBase {
   /** AprilTag field layout. */
   private final AprilTagFieldLayout aprilTagFieldLayout =
       AprilTagFields.k2024Crescendo.loadAprilTagLayoutField();
-
-  /** Enable vision odometry updates while driving. */
-  private final boolean visionDriveTest = false;
 
   /**
    * Initialize {@link SwerveDrive} with the directory provided.
@@ -102,10 +98,6 @@ public class SwerveSubsystem extends SubsystemBase {
     swerveDrive
         .pushOffsetsToEncoders(); // Set the absolute encoder to be used over the internal encoder
     // and push the offsets onto it. Throws warning if not possible
-    if (visionDriveTest) {
-      // Stop the odometry thread if we are using vision that way we can synchronize updates better.
-      swerveDrive.stopOdometryThread();
-    }
     setupPathPlanner();
   }
 
@@ -626,11 +618,5 @@ public class SwerveSubsystem extends SubsystemBase {
    */
   public Rotation2d getPitch() {
     return swerveDrive.getPitch();
-  }
-
-  /** Add a fake vision reading for testing purposes. */
-  public void addFakeVisionReading() {
-    swerveDrive.addVisionMeasurement(
-        new Pose2d(3, 3, Rotation2d.fromDegrees(65)), Timer.getFPGATimestamp());
   }
 }
