@@ -38,14 +38,14 @@ public final class Constants {
     // Hold time on motor brakes when disabled
     public static final double WHEEL_LOCK_TIME = 10; // seconds
   }
-    //Might include random variables
+
+  // Might include random variables
   public static final class IntakeConstants {
 
     public static final int INTAKE_MOTOR = 25;
     public static final int INTAKE_REST_SPEED = 0;
     public static final int deviceId = 17;
     public static final int MOTOR_CURRENT_LIMIT = 40;
-   
   }
 
   public static class OperatorConstants {
