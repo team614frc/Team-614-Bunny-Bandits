@@ -9,19 +9,18 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
-import frc.robot.RobotContainer;
 
 public class LimelightSubsystem extends SubsystemBase {
   /** Creates a new LimelightSubsystem. */
   private NetworkTable limelightTable;
+
   private double x, y, area, angle;
   private Pose2d robotPose;
   private double[] aprilTagInfo;
 
   public LimelightSubsystem() {
     limelightTable = NetworkTableInstance.getDefault().getTable("limelight-intake");
-    //robotPose = RobotContainer.swerveDrive.getPose();
+    // robotPose = RobotContainer.swerveDrive.getPose();
     this.turnOffLEDs();
     aprilTagInfo = limelightTable.getEntry("targetpose_robotspace").getDoubleArray(new double[6]);
   }
