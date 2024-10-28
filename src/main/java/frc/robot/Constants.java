@@ -42,10 +42,11 @@ public final class Constants {
   // Might include random variables
   public static final class IntakeConstants {
 
-    public static final int INTAKE_MOTOR = 25;
+    public static final int INTAKE_MOTOR = 55;
     public static final int INTAKE_REST_SPEED = 0;
     public static final int deviceId = 17;
     public static final int MOTOR_CURRENT_LIMIT = 40;
+    public static final double INTAKE_SPEED = 0.4;
   }
 
   public static class OperatorConstants {

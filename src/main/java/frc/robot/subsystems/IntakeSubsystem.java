@@ -20,9 +20,9 @@ public class IntakeSubsystem extends SubsystemBase {
             .MOTOR_CURRENT_LIMIT); // makes sure the motors don't take too much amps from the
     // battery
     intakeMotor.setInverted(false); // Allows the motors to be able to spin in different directions.
-    intakeMotor.setIdleMode(
-        CANSparkFlex.IdleMode
-            .kCoast); // Causes the motors to slow down in motion when no action is being commanded.
+    // intakeMotor.setIdleMode(
+    //   CANSparkFlex.IdleMode
+    //     .kCoast); // Causes the motors to slow down in motion when no action is being commanded.
     intakeMotor.burnFlash(); // saves changes made to a devices configuration
   }
 
@@ -36,6 +36,6 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void setIntake(double intakeSpeed) {
-    intakeMotor.set(-intakeSpeed); // Allows different motors to spin opposite ways.
+    // intakeMotor.set(-intakeSpeed); // Allows different motors to spin opposite ways.
   }
 }
