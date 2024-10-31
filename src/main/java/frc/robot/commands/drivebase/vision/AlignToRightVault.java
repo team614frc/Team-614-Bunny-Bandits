@@ -1,5 +1,6 @@
 package frc.robot.commands.drivebase.vision;
 
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -22,13 +23,14 @@ public class AlignToRightVault extends Command {
     angle = RobotContainer.drivebase.getDistanceToRightVault();
     turn = -angle / 180.0;
 
-  /* if (Math.abs(angle) <= Constants.ALIGN_THRESHOLD) {
-      turn = RobotContainer.getDriverRightX();
-    } */
-
-  /*  RobotContainer.swerveDrive.drive(
-        RobotContainer.getDriverLeftY(), RobotContainer.getDriverLeftX(), turn, true, true); */
-  } 
+    if (Math.abs(angle) <= Constants.VisionConstants.ALIGN_THRESHOLD) {
+      turn = RobotContainer.driverXbox.getRightX();
+    }
+    Translation2d translation2d =
+        new Translation2d(
+            RobotContainer.driverXbox.getLeftY(), RobotContainer.driverXbox.getLeftX());
+    RobotContainer.drivebase.drive(translation2d, turn, true);
+  }
 
   // Called once the command ends or is interrupted.
   @Override

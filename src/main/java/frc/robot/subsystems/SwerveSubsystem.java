@@ -30,6 +30,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Config;
 import frc.robot.Constants;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.function.DoubleSupplier;
 import swervelib.SwerveController;
@@ -46,10 +48,9 @@ public class SwerveSubsystem extends SubsystemBase {
   /** Swerve drive object. */
   private final SwerveDrive swerveDrive;
 
-  /** AprilTag field layout. */
-  private final AprilTagFieldLayout aprilTagFieldLayout =
-      AprilTagFields.k2024Crescendo.loadAprilTagLayoutField();
+  private final AprilTagFieldLayout aprilTagFieldLayout;
 
+  /** AprilTag field layout. */
   /**
    * Initialize {@link SwerveDrive} with the directory provided.
    *
@@ -66,6 +67,14 @@ public class SwerveSubsystem extends SubsystemBase {
     // meters/second.
     //  The gear ratio is 6.75 motor revolutions per wheel rotation.
     //  The encoder resolution per motor revolution is 1 per motor revolution.
+    AprilTagFieldLayout tempAprilTagFieldLayout;
+    try {
+      tempAprilTagFieldLayout =
+          new AprilTagFieldLayout(Paths.get("src/main/java/frc/robot/Bunnybots_2024.json"));
+    } catch (IOException e) {
+      tempAprilTagFieldLayout = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField();
+    }
+    this.aprilTagFieldLayout = tempAprilTagFieldLayout; // Assign to the final field
     double driveConversionFactor =
         SwerveMath.calculateMetersPerRotation(Units.inchesToMeters(4), 6.75);
     System.out.println("\"conversionFactors\": {");
@@ -99,6 +108,7 @@ public class SwerveSubsystem extends SubsystemBase {
     swerveDrive
         .pushOffsetsToEncoders(); // Set the absolute encoder to be used over the internal encoder
     // and push the offsets onto it. Throws warning if not possible
+    setupPathPlanner();
   }
 
   /**
@@ -110,6 +120,14 @@ public class SwerveSubsystem extends SubsystemBase {
   public SwerveSubsystem(
       SwerveDriveConfiguration driveCfg, SwerveControllerConfiguration controllerCfg) {
     swerveDrive = new SwerveDrive(driveCfg, controllerCfg, Constants.MAX_SPEED);
+    AprilTagFieldLayout tempAprilTagFieldLayout;
+    try {
+      tempAprilTagFieldLayout =
+          new AprilTagFieldLayout(Paths.get("src/main/java/frc/robot/Bunnybots_2024.json"));
+    } catch (IOException e) {
+      tempAprilTagFieldLayout = AprilTagFields.k2024Crescendo.loadAprilTagLayoutField();
+    }
+    this.aprilTagFieldLayout = tempAprilTagFieldLayout;
   }
 
   @Override
@@ -120,32 +138,39 @@ public class SwerveSubsystem extends SubsystemBase {
 
   /** Setup AutoBuilder for PathPlanner. */
   public void setupPathPlanner() {
-    AutoBuilder.configureHolonomic(
+    RobotConfig config = null;
+    try {
+      config = RobotConfig.fromGUISettings();
+    } catch (Exception e) {
+      // Handle exception as needed
+      e.printStackTrace();
+    }
+
+    AutoBuilder.configure(
         this::getPose, // Robot pose supplier
         this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting
         // pose)
         this::getRobotVelocity, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
-        this::setChassisSpeeds, // Method that will drive the robot given ROBOT RELATIVE
-        // ChassisSpeeds
-        new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in
-            // your Constants class
-            Constants.AutoConstants.TRANSLATION_PID,
-            // Translation PID constants
-            Constants.AutoConstants.ANGLE_PID,
-            // Rotation PID constants
-            4.5,
-            // Max module speed, in m/s
-            swerveDrive.swerveDriveConfiguration.getDriveBaseRadiusMeters(),
-            // Drive base radius in meters. Distance from robot center to furthest module.
-            new ReplanningConfig()
-            // Default path replanning config. See the API for the options here
+        (speeds, feedforwards) ->
+            setChassisSpeeds(
+                speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds.
+        // Also optionally outputs individual module feedforwards
+        new PPHolonomicDriveController( // PPHolonomicController is the built in path following
+            // controller for holonomic drive trains
+            new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
+            new PIDConstants(5.0, 0.0, 0.0) // Rotation PID constants
             ),
+        config, // The robot configuration
         () -> {
           // Boolean supplier that controls when the path will be mirrored for the red alliance
           // This will flip the path being followed to the red side of the field.
           // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
+
           var alliance = DriverStation.getAlliance();
-          return alliance.isPresent() ? alliance.get() == DriverStation.Alliance.Red : false;
+          if (alliance.isPresent()) {
+            return alliance.get() == DriverStation.Alliance.Red;
+          }
+          return false;
         },
         this // Reference to this subsystem to set requirements
         );
@@ -156,12 +181,6 @@ public class SwerveSubsystem extends SubsystemBase {
    *
    * @return Distance to speaker in meters.
    */
-  public double getDistanceToSpeaker() {
-    int allianceAprilTag = DriverStation.getAlliance().get() == Alliance.Blue ? 7 : 4;
-    // Taken from PhotonUtils.getDistanceToPose
-    Pose3d speakerAprilTagPose = aprilTagFieldLayout.getTagPose(allianceAprilTag).get();
-    return getPose().getTranslation().getDistance(speakerAprilTagPose.toPose2d().getTranslation());
-  }
 
   /**
    * Get the yaw to aim at the speaker.
@@ -197,42 +216,6 @@ public class SwerveSubsystem extends SubsystemBase {
         })
         .until(() -> getSpeakerYaw().minus(getHeading()).getDegrees() < tolerance);
   }
-
-  public Rotation2d getSpeakerYaw() {
-    int allianceAprilTag = DriverStation.getAlliance().get() == Alliance.Blue ? 7 : 4;
-    // Taken from PhotonUtils.getYawToPose()
-    Pose3d speakerAprilTagPose = aprilTagFieldLayout.getTagPose(allianceAprilTag).get();
-    Translation2d relativeTrl =
-        speakerAprilTagPose.toPose2d().relativeTo(getPose()).getTranslation();
-    return new Rotation2d(relativeTrl.getX(), relativeTrl.getY())
-        .plus(swerveDrive.getOdometryHeading());
-  }
-
-  public double getDistanceToLeftVault() {
-    int allianceAprilTag = DriverStation.getAlliance().get() == Alliance.Blue ? 1 : 2;
-    // Taken from PhotonUtils.getDistanceToPose
-    Pose3d speakerAprilTagPose = aprilTagFieldLayout.getTagPose(allianceAprilTag).get();
-    return getPose().getTranslation().getDistance(speakerAprilTagPose.toPose2d().getTranslation());
-  }
-
-
-  public double getDistanceToRightVault() {
-    int allianceAprilTag = DriverStation.getAlliance().get() == Alliance.Blue ? 3 : 4;
-    // Taken from PhotonUtils.getDistanceToPose
-    Pose3d speakerAprilTagPose = aprilTagFieldLayout.getTagPose(allianceAprilTag).get();
-    return getPose().getTranslation().getDistance(speakerAprilTagPose.toPose2d().getTranslation());
-  }
-
-
-  public double getDistanceToBunnyBank() {
-    int allianceAprilTag = DriverStation.getAlliance().get() == Alliance.Blue ? 6 : 5;
-    // Taken from PhotonUtils.getDistanceToPose
-    Pose3d speakerAprilTagPose = aprilTagFieldLayout.getTagPose(allianceAprilTag).get();
-    return getPose().getTranslation().getDistance(speakerAprilTagPose.toPose2d().getTranslation());
-  }
-
-
-
 
   /**
    * Get the path follower with events.
@@ -384,6 +367,33 @@ public class SwerveSubsystem extends SubsystemBase {
         maximumSpeedInMetersPerSecond,
         false,
         swerveDrive.swerveDriveConfiguration.physicalCharacteristics.optimalVoltage);
+  }
+
+  public double getDistanceToLeftVault() {
+    int allianceAprilTag = DriverStation.getAlliance().get() == Alliance.Blue ? 1 : 2;
+    // Taken from PhotonUtils.getDistanceToPose
+    Pose3d leftVaultAprilTagPose = aprilTagFieldLayout.getTagPose(allianceAprilTag).get();
+    return getPose()
+        .getTranslation()
+        .getDistance(leftVaultAprilTagPose.toPose2d().getTranslation());
+  }
+
+  public double getDistanceToRightVault() {
+    int allianceAprilTag = DriverStation.getAlliance().get() == Alliance.Blue ? 3 : 4;
+    // Taken from PhotonUtils.getDistanceToPose
+    Pose3d rightVaultAprilTagPose = aprilTagFieldLayout.getTagPose(allianceAprilTag).get();
+    return getPose()
+        .getTranslation()
+        .getDistance(rightVaultAprilTagPose.toPose2d().getTranslation());
+  }
+
+  public double getDistanceToBunnyBank() {
+    int allianceAprilTag = DriverStation.getAlliance().get() == Alliance.Blue ? 6 : 5;
+    // Taken from PhotonUtils.getDistanceToPose
+    Pose3d bunnyBankAprilTagPose = aprilTagFieldLayout.getTagPose(allianceAprilTag).get();
+    return getPose()
+        .getTranslation()
+        .getDistance(bunnyBankAprilTagPose.toPose2d().getTranslation());
   }
 
   /**
