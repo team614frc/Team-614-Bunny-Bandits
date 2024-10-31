@@ -39,6 +39,10 @@ public final class Constants {
     public static final double WHEEL_LOCK_TIME = 10; // seconds
   }
 
+  public static final class VisionConstants {
+    public static final double ALIGN_THRESHOLD = 0.05;
+  }
+
   public static class OperatorConstants {
 
     public static final int kDriverControllerPort = 0;
