@@ -44,10 +44,8 @@ public final class Constants {
     public static final double PIVOT_WEIGHT = 9.55;
     public static final double MOTOR_ZERO_SPEED = 0;
     public static final int MOTOR_CURRENT_LIMIT = 40;
-    public static final double CAMERA_MOUNT_ANGLE_DEGREES = 20;
-    public static final double CAMERA_HEIGHT = 0.35; // meters
-    public static final double GOAL_HEIGHT = 1.455; // meters
-
+    public static final double PIVOT_MAX = -(Math.PI / 2) - 0.02;
+    public static final double PIVOT_MIN = 0.08;
   }
 
   public static final class DrivebaseConstants {
