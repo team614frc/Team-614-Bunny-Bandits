@@ -29,20 +29,20 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
 
   private ArmFeedforward feedforward =
       new ArmFeedforward(
-        PivotConstants.PIVOT_kS,
-        PivotConstants.PIVOT_kG,
-        PivotConstants.PIVOT_kV,
-        PivotConstants.PIVOT_kA);
+          PivotConstants.PIVOT_kS,
+          PivotConstants.PIVOT_kG,
+          PivotConstants.PIVOT_kV,
+          PivotConstants.PIVOT_kA);
 
   /** Creates a new PivotSubsystem. */
   public PivotSubsystem() {
     super(
         new ProfiledPIDController(
-          PivotConstants.PIVOT_kP,
-          PivotConstants.PIVOT_kI,
-          PivotConstants.PIVOT_kD,
+            PivotConstants.PIVOT_kP,
+            PivotConstants.PIVOT_kI,
+            PivotConstants.PIVOT_kD,
             new TrapezoidProfile.Constraints(
-              PivotConstants.PIVOT_MAX_VEL, PivotConstants.PIVOT_MAX_ACCEL)));
+                PivotConstants.PIVOT_MAX_VEL, PivotConstants.PIVOT_MAX_ACCEL)));
 
     pivotMotorR = new CANSparkFlex(PivotConstants.PIVOT_RIGHT_MOTOR, MotorType.kBrushless);
     // pivotMotorR.restoreFactoryDefaults();
