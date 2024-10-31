@@ -27,10 +27,27 @@ public final class Constants {
 
   // Maximum speed of the robot in meters per second, used to limit acceleration.
 
-  public static final class AutoConstants {
-
+  public static final class PivotConstants {
     public static final PIDConstants TRANSLATION_PID = new PIDConstants(0.7, 0, 0);
     public static final PIDConstants ANGLE_PID = new PIDConstants(0.4, 0, 0.01);
+    public static final double PIVOT_kP = 0.6; // VOLTS
+    public static final double PIVOT_kI = 0;
+    public static final double PIVOT_kD = 0.0;
+    public static final double PIVOT_kS = 0.5;
+    public static final double PIVOT_kG = 0.2;
+    public static final double PIVOT_kV = 0.2;
+    public static final double PIVOT_kA = 0.01;
+    public static final int PIVOT_LEFT_MOTOR = 13;
+    public static final int PIVOT_RIGHT_MOTOR = 14;
+    public static final double PIVOT_MAX_VEL = 4;
+    public static final double PIVOT_MAX_ACCEL = 20;
+    public static final double PIVOT_WEIGHT = 9.55;
+    public static final double MOTOR_ZERO_SPEED = 0;
+    public static final int MOTOR_CURRENT_LIMIT = 40;
+    public static final double CAMERA_MOUNT_ANGLE_DEGREES = 20;
+    public static final double CAMERA_HEIGHT = 0.35; // meters
+    public static final double GOAL_HEIGHT = 1.455; // meters
+
   }
 
   public static final class DrivebaseConstants {
