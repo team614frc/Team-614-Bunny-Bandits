@@ -15,7 +15,7 @@ import frc.robot.Constants.PivotConstants;
 
 /**
  * The PivotSubsystem has the motor objects for the motors of the Pivot on the robot. It also sets
- * them a value based on the input received from a command -
+ * them a value based on the input received from a command.
  *
  * @param pivotSpeed Variable represents the speed passed from a command that pivot motors should be
  *     set to
