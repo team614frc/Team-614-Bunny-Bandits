@@ -23,7 +23,6 @@ import frc.robot.Constants.PivotConstants;
  */
 public class PivotSubsystem extends ProfiledPIDSubsystem {
   private CANSparkFlex pivotMotorR;
-
   private CANSparkFlex pivotMotorL;
 
   private ArmFeedforward feedforward =
