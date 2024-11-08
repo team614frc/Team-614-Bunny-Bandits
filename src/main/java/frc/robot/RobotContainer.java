@@ -115,7 +115,7 @@ public class RobotContainer {
       driverXbox.rightBumper().onTrue(Commands.none());
       drivebase.setDefaultCommand(
           !RobotBase.isSimulation()
-              ? driveFieldOrientedDirectAngle
+              ? driveFieldOrientedAnglularVelocity
               : driveFieldOrientedDirectAngleSim);
     }
   }
