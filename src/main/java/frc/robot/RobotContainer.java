@@ -114,7 +114,6 @@ public class RobotContainer {
                   () ->
                       drivebase.driveToPose(
                           new Pose2d(new Translation2d(4, 4), Rotation2d.fromDegrees(0)))));
-      driverXbox.y().onTrue(Commands.none());
       driverXbox.start().whileTrue(Commands.none());
       driverXbox.back().whileTrue(Commands.none());
       driverXbox.leftBumper().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
