@@ -8,4 +8,4 @@
 
 ## Autonomous Documentation
 
-Set field image to bunnybotsmap.png with a scale of 68
+Set the field image to [`bunnybotsmap.png`](./bunnybotsmap.png) with a scale of 68.
