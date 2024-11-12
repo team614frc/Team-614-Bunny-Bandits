@@ -22,8 +22,7 @@ import frc.robot.Constants.PivotConstants;
  * @returns pivotPosition through the getPosition()
  */
 public class PivotSubsystem extends ProfiledPIDSubsystem {
-  private CANSparkFlex pivotMotorR;
-  private CANSparkFlex pivotMotorL;
+  private CANSparkFlex pivotMotor;
 
   private ArmFeedforward feedforward =
       new ArmFeedforward(
@@ -42,21 +41,11 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
             new TrapezoidProfile.Constraints(
                 PivotConstants.PIVOT_MAX_VEL, PivotConstants.PIVOT_MAX_ACCEL)));
 
-    pivotMotorR = new CANSparkFlex(PivotConstants.PIVOT_RIGHT_MOTOR, MotorType.kBrushless);
-    // pivotMotorR.restoreFactoryDefaults();
-    pivotMotorR.setSmartCurrentLimit(PivotConstants.MOTOR_CURRENT_LIMIT);
-    pivotMotorR.setIdleMode(CANSparkFlex.IdleMode.kBrake);
-    pivotMotorR.getEncoder().setPosition(0);
-    pivotMotorR.setInverted(true);
-    pivotMotorR.burnFlash();
-
-    pivotMotorL = new CANSparkFlex(PivotConstants.PIVOT_LEFT_MOTOR, MotorType.kBrushless);
-    // pivotMotorL.restoreFactoryDefaults();
-    pivotMotorL.setSmartCurrentLimit(PivotConstants.MOTOR_CURRENT_LIMIT);
-    pivotMotorL.setIdleMode(CANSparkFlex.IdleMode.kBrake);
-    pivotMotorL.getEncoder().setPosition(0);
-    pivotMotorR.setInverted(false);
-    pivotMotorL.burnFlash();
+    pivotMotor.setSmartCurrentLimit(PivotConstants.MOTOR_CURRENT_LIMIT);
+    pivotMotor.setIdleMode(CANSparkFlex.IdleMode.kBrake);
+    pivotMotor.getEncoder().setPosition(0);
+    pivotMotor.setInverted(true);
+    pivotMotor.burnFlash();
 
     SmartDashboard.putNumber("Pivot Height", getMeasurement());
   }
@@ -65,8 +54,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
   public void useOutput(double output, TrapezoidProfile.State setpoint) {
     // Use the output (and optionally the setpoint) here
     double feed = feedforward.calculate(setpoint.position, setpoint.velocity);
-    pivotMotorL.set(output + getController().calculate(getMeasurement() + feed));
-    pivotMotorR.set(output + getController().calculate(getMeasurement() + feed));
+    pivotMotor.set(output + getController().calculate(getMeasurement() + feed));
   }
 
   @Override
@@ -75,13 +63,13 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     return getEncoderinRadians();
   }
 
-  public double getPivotLEncoder() {
-    return pivotMotorL.getEncoder().getPosition();
+  public double getPivotEncoder() {
+    return pivotMotor.getEncoder().getPosition();
   }
 
   public double getEncoderinDegrees() {
     double val = 180.0 / 360.0; // 7168 ticks per rev, 180:1 gear ratio
-    return (getPivotLEncoder() / val);
+    return (getPivotEncoder() / val);
   }
 
   public double getEncoderinRadians() {
@@ -93,7 +81,6 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
   }
 
   public void set(double speed) {
-    pivotMotorL.set(speed);
-    pivotMotorR.set(speed);
+    pivotMotor.set(speed);
   }
 }

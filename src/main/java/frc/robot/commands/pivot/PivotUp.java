@@ -37,10 +37,10 @@ public class PivotUp extends Command {
   @Override
   public void execute() {
 
-    if (Math.abs(RobotContainer.pivotSubsystem.getPivotLEncoder()) < PivotConstants.PIVOT_MAX) {
+    if (Math.abs(RobotContainer.pivotSubsystem.getPivotEncoder()) < PivotConstants.PIVOT_MAX) {
       RobotContainer.pivotSubsystem.set(pivotSpeed);
       SmartDashboard.putNumber(
-          "Encoder Position in Command", RobotContainer.pivotSubsystem.getPivotLEncoder());
+          "Encoder Position in Command", RobotContainer.pivotSubsystem.getPivotEncoder());
     } else {
       RobotContainer.pivotSubsystem.set(PivotConstants.MOTOR_ZERO_SPEED);
     }

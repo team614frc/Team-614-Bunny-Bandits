@@ -42,7 +42,7 @@ public class PivotDown extends Command {
     if (RobotContainer.pivotSubsystem.getEncoderinRadians() < set) {
       RobotContainer.pivotSubsystem.set(pivotSpeed);
       SmartDashboard.putNumber(
-          "Encoder Position in Command", RobotContainer.pivotSubsystem.getPivotLEncoder());
+          "Encoder Position in Command", RobotContainer.pivotSubsystem.getPivotEncoder());
     } else {
       RobotContainer.pivotSubsystem.set(PivotConstants.MOTOR_ZERO_SPEED);
     }
