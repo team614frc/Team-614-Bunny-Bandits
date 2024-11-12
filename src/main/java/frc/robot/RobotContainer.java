@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.pivot.PivotDown;
+import frc.robot.commands.pivot.PivotUp;
 import frc.robot.subsystems.PivotSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 import java.io.File;
@@ -90,6 +92,8 @@ public class RobotContainer {
    */
   private void configureBindings() {
     if (DriverStation.isTest()) {
+      driverXbox.a().whileTrue(new PivotDown(0.75, -0.1));
+      driverXbox.x().whileTrue(new PivotUp(0.75));
       driverXbox.b().whileTrue(drivebase.sysIdDriveMotorCommand());
       driverXbox.x().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
       driverXbox.y().whileTrue(drivebase.driveToDistanceCommand(1.0, 0.2));

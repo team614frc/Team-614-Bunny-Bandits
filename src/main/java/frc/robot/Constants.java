@@ -30,13 +30,13 @@ public final class Constants {
   public static final class PivotConstants {
     public static final PIDConstants TRANSLATION_PID = new PIDConstants(0.7, 0, 0);
     public static final PIDConstants ANGLE_PID = new PIDConstants(0.4, 0, 0.01);
-    public static final double PIVOT_kP = 0.6; // VOLTS
+    public static final double PIVOT_kP = 0;
     public static final double PIVOT_kI = 0;
-    public static final double PIVOT_kD = 0.0;
-    public static final double PIVOT_kS = 0.5;
-    public static final double PIVOT_kG = 0.2;
-    public static final double PIVOT_kV = 0.2;
-    public static final double PIVOT_kA = 0.01;
+    public static final double PIVOT_kD = 0;
+    public static final double PIVOT_kS = 0;
+    public static final double PIVOT_kG = 0;
+    public static final double PIVOT_kV = 0;
+    public static final double PIVOT_kA = 0;
     public static final int PIVOT_MOTOR = 1;
     public static final double PIVOT_MAX_VEL = 4;
     public static final double PIVOT_MAX_ACCEL = 20;
