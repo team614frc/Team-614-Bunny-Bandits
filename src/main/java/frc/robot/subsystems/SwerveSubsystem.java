@@ -76,21 +76,26 @@ public class SwerveSubsystem extends SubsystemBase {
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
-    swerveDrive.setHeadingCorrection(
-        false); // Heading correction should only be used while controlling the robot via angle.
-    swerveDrive.setCosineCompensator(
-        false); // !SwerveDriveTelemetry.isSimulation); // Disables cosine compensation for
-    // simulations since it causes discrepancies not seen in real life.
-    swerveDrive.setAngularVelocityCompensation(
-        true, true,
-        0.1); // Correct for skew that gets worse as angular velocity increases. Start with a
-    // coefficient of 0.1.
-    swerveDrive.setModuleEncoderAutoSynchronize(
-        false, 1); // Enable if you want to resynchronize your absolute encoders and motor encoders
-    // periodically when they are not moving.
-    swerveDrive
-        .pushOffsetsToEncoders(); // Set the absolute encoder to be used over the internal encoder
-    // and push the offsets onto it. Throws warning if not possible
+
+    // Heading correction should only be used while controlling the robot via angle.
+    swerveDrive.setHeadingCorrection(false);
+
+    // Disables cosine compensation for simulations since it causes discrepancies not seen in real
+    // life.
+    swerveDrive.setCosineCompensator(!SwerveDriveTelemetry.isSimulation);
+
+    // Correct for skew that gets worse as angular velocity increases. Start with a coefficient of
+    // 0.1.
+    swerveDrive.setAngularVelocityCompensation(true, true, 0.1);
+
+    // Enable if you want to resynchronize your absolute encoders and motor encoders periodically
+    // when they are not moving.
+    swerveDrive.setModuleEncoderAutoSynchronize(false, 1);
+
+    // Set the absolute encoder to be used over the internal encoder and push the offsets onto it.
+    // Throws warning if not possible.
+    swerveDrive.pushOffsetsToEncoders();
+
     setupPathPlanner();
   }
 
@@ -199,8 +204,8 @@ public class SwerveSubsystem extends SubsystemBase {
       DoubleSupplier translationY,
       DoubleSupplier headingX,
       DoubleSupplier headingY) {
-    // swerveDrive.setHeadingCorrection(true); // Normally you would want heading correction for
-    // this kind of control.
+    // Normally you would want heading correction for this kind of control.
+    // swerveDrive.setHeadingCorrection(true);
     return run(
         () -> {
           Translation2d scaledInputs =
@@ -229,8 +234,8 @@ public class SwerveSubsystem extends SubsystemBase {
    */
   public Command simDriveCommand(
       DoubleSupplier translationX, DoubleSupplier translationY, DoubleSupplier rotation) {
-    // swerveDrive.setHeadingCorrection(true); // Normally you would want heading correction for
-    // this kind of control.
+    // Normally you would want heading correction for this kind of control.
+    // swerveDrive.setHeadingCorrection(true);
     return run(
         () -> {
           // Make the robot move
