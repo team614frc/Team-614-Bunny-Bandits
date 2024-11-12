@@ -49,4 +49,32 @@ public final class Constants {
     public static final double RIGHT_X_DEADBAND = 0.1;
     public static final double TURN_CONSTANT = 6;
   }
+
+  public static class ManipulatorConstants {
+    public static final int SHOOTER_MOTOR = 19;
+    public static final int MOTOR_CURRENT_LIMIT = 40;
+    public static final double SHOOT_MAX_VEL_SET = 6630.0;
+    public static final double SCORE_AMP_SPEED = 2000;
+    public static final double SCORE_SIMPLE = 0.8;
+    public static final double SCORE_SIMPLE_RPM = 5000;
+    public static final double SCORE_INPLACE_BABY_RPM = 1000;
+    public static final double SCORE_INPLACE_TEEN_RPM = 1500;
+    public static final double FEEDER_SHOT_RPM = 4500;
+    public static final double SHOOTER_FEED = 0.2;
+    public static final double AMP_SPEED = 0.2;
+    public static final double SHOOTER_kFF = 0.000082;
+    public static final double SHOOTER_kP = 0.00045;
+    public static final double OUTTAKE_SPEED = -0.5;
+    public static final double INTAKE_SPEED = 0.75;
+    public static final double INTAKE_REST_SPEED = 0.00;
+    public static final double SHOOTER_THRESHOLD = 150;
+    public static final double PUKE_SPEED = -1;
+    public static final double TRAP_SPEED = 1900;
+    public static final double LOADBACK_SPEED = -0.08; // MAYBE BACK AND FORTH WAS THE MOVE
+    public static final double LOADING_SPEED = 1; // (Note fixed its deformity)
+    public static final double AMP_LOAD = 0.5;
+    public static final double RUMBLE_TIMER = 2;
+    public static final double RUMBLE_SETTING = .6;
+
+  }
 }
