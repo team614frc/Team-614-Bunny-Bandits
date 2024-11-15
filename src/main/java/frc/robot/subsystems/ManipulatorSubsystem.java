@@ -7,15 +7,18 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkFlex;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import frc.robot.Constants;
 import frc.robot.Constants.ManipulatorConstants;
+import swervelib.math.SwerveMath;
 
 public class ManipulatorSubsystem extends PIDSubsystem {
   /** Creates a new ShooterSubsystem. */
-  CANSparkFlex shooterMotor;
+  CANSparkFlex manipulatorMotor;
 
 
   public ManipulatorSubsystem() {
@@ -23,12 +26,12 @@ public class ManipulatorSubsystem extends PIDSubsystem {
         // The PIDController used by the subsystem
         new PIDController(Constants.ManipulatorConstants.SHOOTER_kP, 0, 0));
 
-    shooterMotor = new CANSparkFlex(Constants.ManipulatorConstants.SHOOTER_MOTOR, MotorType.kBrushless);
+    manipulatorMotor = new CANSparkFlex(Constants.ManipulatorConstants.SHOOTER_MOTOR, MotorType.kBrushless);
     // shooterMotor.restoreFactoryDefaults();
-    shooterMotor.setSmartCurrentLimit(Constants.ManipulatorConstants.MOTOR_CURRENT_LIMIT);
-    shooterMotor.setInverted(true);
-    shooterMotor.setIdleMode(CANSparkFlex.IdleMode.kCoast);
-    shooterMotor.burnFlash();
+    manipulatorMotor.setSmartCurrentLimit(Constants.ManipulatorConstants.MOTOR_CURRENT_LIMIT);
+    manipulatorMotor.setInverted(true);
+    manipulatorMotor.setIdleMode(CANSparkFlex.IdleMode.kCoast);
+    manipulatorMotor.burnFlash();
   }
 
   @Override
@@ -40,7 +43,7 @@ public class ManipulatorSubsystem extends PIDSubsystem {
   @Override
   public void useOutput(double output, double setpoint) {
     // Use the output here
-    shooterMotor.setVoltage(-(output + getController().calculate(getMeasurement(), setpoint)));
+    manipulatorMotor.setVoltage(-(output + getController().calculate(getMeasurement(), setpoint)));
   }
 
   @Override
@@ -51,14 +54,15 @@ public class ManipulatorSubsystem extends PIDSubsystem {
   }
 
   public double getManipulatorVelocity() {
-    return shooterMotor.getEncoder().getVelocity();
+    return manipulatorMotor.getEncoder().getVelocity();
   }
 
   public void set(double speed) {
-    shooterMotor.set(-speed);
+    manipulatorMotor.set(-speed);
   }
 
   public boolean atGoal(double goal) {
     return Math.abs(getMeasurement() + goal) <= ManipulatorConstants.SHOOTER_THRESHOLD;
   }
+
 }

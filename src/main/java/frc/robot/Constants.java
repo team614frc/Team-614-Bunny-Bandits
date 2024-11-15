@@ -60,8 +60,6 @@ public final class Constants {
     public static final double SCORE_INPLACE_BABY_RPM = 1000;
     public static final double SCORE_INPLACE_TEEN_RPM = 1500;
     public static final double FEEDER_SHOT_RPM = 4500;
-    public static final double SHOOTER_FEED = 0.2;
-    public static final double AMP_SPEED = 0.2;
     public static final double SHOOTER_kFF = 0.000082;
     public static final double SHOOTER_kP = 0.00045;
     public static final double OUTTAKE_SPEED = -0.5;
