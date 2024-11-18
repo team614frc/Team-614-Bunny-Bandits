@@ -39,7 +39,7 @@ public final class Constants {
 
   public static final class DrivebaseConstants {
     // Hold time on motor brakes when disabled.
-    public static final Measure<Time> WHEEL_LOCK_TIME_SECS = Seconds.of(10); // seconds
+    public static final Measure<Time> WHEEL_LOCK_TIME = Seconds.of(10);
   }
 
   public static class OperatorConstants {
