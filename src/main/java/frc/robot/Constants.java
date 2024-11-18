@@ -27,7 +27,7 @@ import swervelib.math.Matter;
 public final class Constants {
   public static final Measure<Mass> ROBOT_MASS = Pounds.of(125);
   public static final Matter CHASSIS =
-      new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS.in(Pounds));
+      new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS.in(Kilogram));
   public static final Measure<Time> LOOP_TIME =
       Seconds.of(0.13); // s, 20ms + 110ms sprk max velocity lag
   public static final Measure<Velocity<Distance>> MAX_SPEED = FeetPerSecond.of(14.5);
