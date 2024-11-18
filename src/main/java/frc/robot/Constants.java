@@ -37,7 +37,7 @@ public final class Constants {
     public static final double PIVOT_kG = 0;
     public static final double PIVOT_kV = 0;
     public static final double PIVOT_kA = 0;
-    public static final int PIVOT_MOTOR = 1;
+    public static final int PIVOT_MOTOR = 20;
     public static final double PIVOT_MAX_VEL = 4;
     public static final double PIVOT_MAX_ACCEL = 20;
     public static final double PIVOT_WEIGHT = 9.55;

@@ -5,11 +5,13 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkFlex;
-import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.units.Units.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ProfiledPIDSubsystem;
 import frc.robot.Constants.PivotConstants;
 
@@ -57,6 +59,47 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     pivotMotor.set(output + getController().calculate(getMeasurement() + feed));
   }
 
+  public boolean atGoal(double goal, double threshold) {
+    return Math.abs(getMeasurement() - goal) < threshold;
+  }
+
+  public void set(double speed) {
+    pivotMotor.set(speed);
+  }
+
+  public Command PivotDown(double pivotSpeed, double set, PivotSubsystem pivot) {
+    return Commands.runEnd(
+        () -> {
+          if (getEncoderinRadians() < set) {
+            set(pivotSpeed);
+            SmartDashboard.putNumber("Encoder Position in Command", getPivotEncoder());
+          } else {
+            set(PivotConstants.MOTOR_ZERO_SPEED);
+          }
+          set(PivotConstants.MOTOR_ZERO_SPEED);
+        },
+        () -> {
+          set(PivotConstants.MOTOR_ZERO_SPEED);
+        },
+        pivot);
+  }
+
+  public Command PivotUp(double pivotSpeed, PivotSubsystem pivot) {
+    return Commands.runEnd(
+        () -> {
+          if (Math.abs(getPivotEncoder()) < PivotConstants.PIVOT_MAX) {
+            set(pivotSpeed);
+            SmartDashboard.putNumber("Encoder Position in Command", getPivotEncoder());
+          } else {
+            set(PivotConstants.MOTOR_ZERO_SPEED);
+          }
+        },
+        () -> {
+          set(PivotConstants.MOTOR_ZERO_SPEED);
+        },
+        pivot);
+  }
+
   @Override
   public double getMeasurement() {
     // Return the process variable measurement here
@@ -74,13 +117,5 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
 
   public double getEncoderinRadians() {
     return (getEncoderinDegrees() * (Math.PI / 180.0));
-  }
-
-  public boolean atGoal(double goal, double threshold) {
-    return Math.abs(getMeasurement() - goal) < threshold;
-  }
-
-  public void set(double speed) {
-    pivotMotor.set(speed);
   }
 }
