@@ -73,8 +73,8 @@ public class RobotContainer {
    */
   private void configureBindings() {
     
-    driverXbox.a().whileTrue(pivotSubsystem.PivotDown(0.75, -0.1, pivotSubsystem));
-    driverXbox.x().whileTrue(pivotSubsystem.PivotUp(0.75, pivotSubsystem));
+    driverXbox.a().whileTrue(pivotSubsystem.PivotDown(pivotSubsystem, 0.75, -0.1));
+    driverXbox.x().whileTrue(pivotSubsystem.PivotUp(pivotSubsystem,0.75));
   driverXbox
         .b()
         .whileTrue(

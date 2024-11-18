@@ -41,7 +41,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
             PivotConstants.PIVOT_kI,
             PivotConstants.PIVOT_kD,
             new TrapezoidProfile.Constraints(
-                PivotConstants.PIVOT_MAX_VEL, PivotConstants.PIVOT_MAX_ACCEL)));
+                PivotConstants.PIVOT_MAX_VEL.baseUnitMagnitude(), PivotConstants.PIVOT_MAX_ACCEL.baseUnitMagnitude())));
 
     pivotMotor.setSmartCurrentLimit(PivotConstants.MOTOR_CURRENT_LIMIT);
     pivotMotor.setIdleMode(CANSparkFlex.IdleMode.kBrake);
