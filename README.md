@@ -5,3 +5,7 @@
 ```
 ./gradlew spotlessApply
 ```
+
+## Autonomous Documentation
+
+Set the field image to [`bunnybotsmap.png`](./bunnybotsmap.png) with a scale of 68.
