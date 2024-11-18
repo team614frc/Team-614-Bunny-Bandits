@@ -28,6 +28,7 @@ public final class Constants {
   // Maximum speed of the robot in meters per second, used to limit acceleration.
 
   public static final class PivotConstants {
+    public static final double VORTEX_ENCODER_TICKS_PER_REVOLUTION = 7168;
     public static final PIDConstants TRANSLATION_PID = new PIDConstants(0.7, 0, 0);
     public static final PIDConstants ANGLE_PID = new PIDConstants(0.4, 0, 0.01);
     public static final double PIVOT_kP = 0;

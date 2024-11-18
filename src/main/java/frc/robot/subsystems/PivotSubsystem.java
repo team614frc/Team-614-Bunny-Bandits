@@ -67,7 +67,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     pivotMotor.set(speed);
   }
 
-  public Command PivotDown(double pivotSpeed, double set, PivotSubsystem pivot) {
+  public Command PivotDown(PivotSubsystem pivot, double pivotSpeed, double set) {
     return Commands.runEnd(
         () -> {
           if (getEncoderinRadians() < set) {
@@ -76,7 +76,6 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
           } else {
             set(PivotConstants.MOTOR_ZERO_SPEED);
           }
-          set(PivotConstants.MOTOR_ZERO_SPEED);
         },
         () -> {
           set(PivotConstants.MOTOR_ZERO_SPEED);
@@ -84,7 +83,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
         pivot);
   }
 
-  public Command PivotUp(double pivotSpeed, PivotSubsystem pivot) {
+  public Command PivotUp(PivotSubsystem pivot, double pivotSpeed) {
     return Commands.runEnd(
         () -> {
           if (Math.abs(getPivotEncoder()) < PivotConstants.PIVOT_MAX) {
@@ -111,7 +110,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
   }
 
   public double getEncoderinDegrees() {
-    double val = 180.0 / 360.0; // 7168 ticks per rev, 180:1 gear ratio
+    double val = 60.0 / 360.0; // 7168 ticks per rev, 60:1 gear ratio
     return (getPivotEncoder() / val);
   }
 
