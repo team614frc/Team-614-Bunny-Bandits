@@ -10,7 +10,9 @@ import com.pathplanner.lib.config.PIDConstants;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.units.Distance;
+import edu.wpi.first.units.Mass;
 import edu.wpi.first.units.Measure;
+import edu.wpi.first.units.Time;
 import edu.wpi.first.units.Velocity;
 import swervelib.math.Matter;
 
@@ -23,10 +25,10 @@ import swervelib.math.Matter;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static final double ROBOT_MASS_KG = (148 - 20.3) * 0.453592; // 32lbs * kg per pound
+  public static final Measure<Mass> ROBOT_MASS = Pounds.of(125);
   public static final Matter CHASSIS =
-      new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS_KG);
-  public static final double LOOP_TIME_SECS = 0.13; // s, 20ms + 110ms sprk max velocity lag
+      new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS.in(Pounds));
+  public static final Measure<Time> LOOP_TIME = Seconds.of(0.13); // s, 20ms + 110ms sprk max velocity lag
   public static final Measure<Velocity<Distance>> MAX_SPEED = FeetPerSecond.of(14.5);
 
   public static final class AutoConstants {

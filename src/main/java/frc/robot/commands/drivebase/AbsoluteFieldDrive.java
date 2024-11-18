@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.SwerveSubsystem;
+import static edu.wpi.first.units.Units.Pounds;
+import static edu.wpi.first.units.Units.Seconds;
+
 import java.util.List;
 import java.util.function.DoubleSupplier;
 import swervelib.SwerveController;
@@ -64,8 +67,8 @@ public class AbsoluteFieldDrive extends Command {
             translation,
             swerve.getFieldVelocity(),
             swerve.getPose(),
-            Constants.LOOP_TIME_SECS,
-            Constants.ROBOT_MASS_KG,
+            Constants.LOOP_TIME.in(Seconds),
+            Constants.ROBOT_MASS.in(Pounds),
             List.of(Constants.CHASSIS),
             swerve.getSwerveDriveConfiguration());
     SmartDashboard.putNumber("LimitedTranslation", translation.getX());
