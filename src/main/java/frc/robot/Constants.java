@@ -4,9 +4,14 @@
 
 package frc.robot;
 
+import static edu.wpi.first.units.Units.*;
+
 import com.pathplanner.lib.config.PIDConstants;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.units.Distance;
+import edu.wpi.first.units.Measure;
+import edu.wpi.first.units.Velocity;
 import swervelib.math.Matter;
 
 /**
@@ -18,11 +23,11 @@ import swervelib.math.Matter;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static final double ROBOT_MASS = (148 - 20.3) * 0.453592; // 32lbs * kg per pound
+  public static final double ROBOT_MASS_KG = (148 - 20.3) * 0.453592; // 32lbs * kg per pound
   public static final Matter CHASSIS =
-      new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS);
-  public static final double LOOP_TIME = 0.13; // s, 20ms + 110ms sprk max velocity lag
-  public static final double MAX_SPEED = Units.feetToMeters(14.5);
+      new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS_KG);
+  public static final double LOOP_TIME_SECS = 0.13; // s, 20ms + 110ms sprk max velocity lag
+  public static final Measure<Velocity<Distance>> MAX_SPEED = FeetPerSecond.of(14.5);
 
   public static final class AutoConstants {
     public static final PIDConstants TRANSLATION_PID = new PIDConstants(0.7, 0, 0);
@@ -31,11 +36,11 @@ public final class Constants {
 
   public static final class DrivebaseConstants {
     // Hold time on motor brakes when disabled.
-    public static final double WHEEL_LOCK_TIME = 10; // seconds
+    public static final double WHEEL_LOCK_TIME_SECS = 10; // seconds
   }
 
   public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
+    public static final int DRIVER_CONTROLLER_PORT = 0;
 
     // Joystick deadband.
     public static final double LEFT_X_DEADBAND = 0.1;
