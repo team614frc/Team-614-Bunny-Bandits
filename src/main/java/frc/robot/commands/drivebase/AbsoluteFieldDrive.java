@@ -4,6 +4,9 @@
 
 package frc.robot.commands.drivebase;
 
+import static edu.wpi.first.units.Units.Kilograms;
+import static edu.wpi.first.units.Units.Seconds;
+
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -64,8 +67,8 @@ public class AbsoluteFieldDrive extends Command {
             translation,
             swerve.getFieldVelocity(),
             swerve.getPose(),
-            Constants.LOOP_TIME,
-            Constants.ROBOT_MASS,
+            Constants.LOOP_TIME.in(Seconds),
+            Constants.ROBOT_MASS.in(Kilograms),
             List.of(Constants.CHASSIS),
             swerve.getSwerveDriveConfiguration());
     SmartDashboard.putNumber("LimitedTranslation", translation.getX());

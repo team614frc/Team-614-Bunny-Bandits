@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import static edu.wpi.first.units.Units.Seconds;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -74,7 +76,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    if (disabledTimer.hasElapsed(Constants.DrivebaseConstants.WHEEL_LOCK_TIME)) {
+    if (disabledTimer.hasElapsed(Constants.DrivebaseConstants.WHEEL_LOCK_TIME.in(Seconds))) {
       m_robotContainer.setMotorBrake(false);
       disabledTimer.stop();
     }
