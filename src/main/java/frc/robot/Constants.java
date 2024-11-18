@@ -28,7 +28,8 @@ public final class Constants {
   public static final Measure<Mass> ROBOT_MASS = Pounds.of(125);
   public static final Matter CHASSIS =
       new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS.in(Pounds));
-  public static final Measure<Time> LOOP_TIME = Seconds.of(0.13); // s, 20ms + 110ms sprk max velocity lag
+  public static final Measure<Time> LOOP_TIME =
+      Seconds.of(0.13); // s, 20ms + 110ms sprk max velocity lag
   public static final Measure<Velocity<Distance>> MAX_SPEED = FeetPerSecond.of(14.5);
 
   public static final class AutoConstants {
@@ -38,7 +39,7 @@ public final class Constants {
 
   public static final class DrivebaseConstants {
     // Hold time on motor brakes when disabled.
-    public static final double WHEEL_LOCK_TIME_SECS = 10; // seconds
+    public static final Measure<Time> WHEEL_LOCK_TIME_SECS = Seconds.of(10); // seconds
   }
 
   public static class OperatorConstants {
