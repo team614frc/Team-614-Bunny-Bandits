@@ -105,16 +105,8 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     return getEncoderinRadians();
   }
 
-  public double getPivotEncoder() {
-    return pivotMotor.getEncoder().getPosition();
-  }
-
-  public double getEncoderinDegrees() {
-    double val = 60.0 / 360.0; // 7168 ticks per rev, 60:1 gear ratio
-    return (getPivotEncoder() / val);
-  }
-
-  public double getEncoderinRadians() {
-    return (getEncoderinDegrees() * (Math.PI / 180.0));
+    public Measure<Angle> getPosition() {
+    var position = pivotMotor.getEncoder().getPosition();
+    return Degree.of(position / PivotConstants.GEAR_RATIO / 360);
   }
 }
