@@ -9,10 +9,10 @@ import static edu.wpi.first.units.Units.*;
 import com.pathplanner.lib.config.PIDConstants;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.units.Distance;
-import edu.wpi.first.units.Mass;
 import edu.wpi.first.units.Angle;
 import edu.wpi.first.units.Current;
+import edu.wpi.first.units.Distance;
+import edu.wpi.first.units.Mass;
 import edu.wpi.first.units.Measure;
 import edu.wpi.first.units.Time;
 import edu.wpi.first.units.Velocity;
@@ -42,12 +42,13 @@ public final class Constants {
     public static final double PIVOT_kI = 0;
     public static final double PIVOT_kD = 0;
     public static final double PIVOT_kS = 0;
-    public static final double PIVOT_kG = 0; 
+    public static final double PIVOT_kG = 0;
     public static final double PIVOT_kV = 0;
     public static final double PIVOT_kA = 0;
     public static final int PIVOT_MOTOR = 20;
     public static final Measure<Velocity<Angle>> PIVOT_MAX_VEL = RPM.of(4);
-    public static final Measure<Velocity<Velocity<Distance>>> PIVOT_MAX_ACCEL = MetersPerSecondPerSecond.of(20);
+    public static final Measure<Velocity<Velocity<Distance>>> PIVOT_MAX_ACCEL =
+        MetersPerSecondPerSecond.of(20);
     public static final Measure<Mass> PIVOT_WEIGHT = Kilogram.of(9.55);
     public static final Measure<Velocity<Angle>> MOTOR_ZERO_SPEED = RPM.of(0);
     public static final Measure<Current> MOTOR_CURRENT_LIMIT = Amp.of(40);

@@ -45,9 +45,10 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
             PivotConstants.PIVOT_kI,
             PivotConstants.PIVOT_kD,
             new TrapezoidProfile.Constraints(
-                PivotConstants.PIVOT_MAX_VEL.baseUnitMagnitude(), PivotConstants.PIVOT_MAX_ACCEL.baseUnitMagnitude())));
+                PivotConstants.PIVOT_MAX_VEL.baseUnitMagnitude(),
+                PivotConstants.PIVOT_MAX_ACCEL.baseUnitMagnitude())));
 
-    pivotMotor.setSmartCurrentLimit((int)(PivotConstants.MOTOR_CURRENT_LIMIT.baseUnitMagnitude()));
+    pivotMotor.setSmartCurrentLimit((int) (PivotConstants.MOTOR_CURRENT_LIMIT.baseUnitMagnitude()));
     pivotMotor.setIdleMode(CANSparkFlex.IdleMode.kBrake);
     pivotMotor.getEncoder().setPosition(0);
     pivotMotor.setInverted(true);
@@ -71,12 +72,14 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     pivotMotor.set(speed.baseUnitMagnitude());
   }
 
-  public Command PivotDown(PivotSubsystem pivot, Measure<Velocity<Angle>> pivotSpeed, Measure<Angle> set) {
+  public Command PivotDown(
+      PivotSubsystem pivot, Measure<Velocity<Angle>> pivotSpeed, Measure<Angle> set) {
     return Commands.runEnd(
         () -> {
           if (getPosition().baseUnitMagnitude() < set.baseUnitMagnitude()) {
             set(pivotSpeed);
-            SmartDashboard.putNumber("Encoder Position in Command", getPosition().baseUnitMagnitude());
+            SmartDashboard.putNumber(
+                "Encoder Position in Command", getPosition().baseUnitMagnitude());
           } else {
             set(PivotConstants.MOTOR_ZERO_SPEED);
           }
@@ -90,9 +93,11 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
   public Command PivotUp(PivotSubsystem pivot, Measure<Velocity<Angle>> pivotSpeed) {
     return Commands.runEnd(
         () -> {
-          if (Math.abs(getPosition().baseUnitMagnitude()) < PivotConstants.PIVOT_MAX.baseUnitMagnitude()) {
+          if (Math.abs(getPosition().baseUnitMagnitude())
+              < PivotConstants.PIVOT_MAX.baseUnitMagnitude()) {
             set(pivotSpeed);
-            SmartDashboard.putNumber("Encoder Position in Command", getPosition().baseUnitMagnitude());
+            SmartDashboard.putNumber(
+                "Encoder Position in Command", getPosition().baseUnitMagnitude());
           } else {
             set(PivotConstants.MOTOR_ZERO_SPEED);
           }
@@ -108,7 +113,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     return getPosition().baseUnitMagnitude();
   }
 
-    public Measure<Angle> getPosition() {
+  public Measure<Angle> getPosition() {
     var position = pivotMotor.getEncoder().getPosition();
     return Degree.of(position / PivotConstants.GEAR_RATIO / 360);
   }
