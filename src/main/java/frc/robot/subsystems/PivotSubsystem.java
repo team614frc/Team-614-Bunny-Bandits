@@ -4,11 +4,15 @@
 
 package frc.robot.subsystems;
 
+import static edu.wpi.first.units.Units.Degree;
+
 import com.revrobotics.CANSparkFlex;
 import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.units.Units.*;
+import edu.wpi.first.units.Angle;
+import edu.wpi.first.units.Measure;
+import edu.wpi.first.units.Velocity;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -63,46 +67,45 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     return Math.abs(getMeasurement() - goal) < threshold;
   }
 
-  public void set(double speed) {
-    pivotMotor.set(speed);
+  public void set(Measure<Velocity<Angle>> speed) {
+    pivotMotor.set(speed.baseUnitMagnitude());
   }
 
-  public Command PivotDown(PivotSubsystem pivot, double pivotSpeed, double set) {
+  public Command PivotDown(PivotSubsystem pivot, Measure<Velocity<Angle>> pivotSpeed, Measure<Angle> set) {
     return Commands.runEnd(
         () -> {
-          if (getEncoderinRadians() < set) {
+          if (getPosition().baseUnitMagnitude() < set.baseUnitMagnitude()) {
             set(pivotSpeed);
-            SmartDashboard.putNumber("Encoder Position in Command", getPivotEncoder());
+            SmartDashboard.putNumber("Encoder Position in Command", getPosition().baseUnitMagnitude());
           } else {
-            set(PivotConstants.MOTOR_ZERO_SPEED.baseUnitMagnitude());
+            set(PivotConstants.MOTOR_ZERO_SPEED);
           }
         },
         () -> {
-          set(PivotConstants.MOTOR_ZERO_SPEED.baseUnitMagnitude());
+          set(PivotConstants.MOTOR_ZERO_SPEED);
         },
         pivot);
   }
 
-  public Command PivotUp(PivotSubsystem pivot, double pivotSpeed) {
+  public Command PivotUp(PivotSubsystem pivot, Measure<Velocity<Angle>> pivotSpeed) {
     return Commands.runEnd(
         () -> {
-          if (Math.abs(getPivotEncoder()) < PivotConstants.PIVOT_MAX) {
+          if (Math.abs(getPosition().baseUnitMagnitude()) < PivotConstants.PIVOT_MAX.baseUnitMagnitude()) {
             set(pivotSpeed);
-            SmartDashboard.putNumber("Encoder Position in Command", getPivotEncoder());
+            SmartDashboard.putNumber("Encoder Position in Command", getPosition().baseUnitMagnitude());
           } else {
-            set(PivotConstants.MOTOR_ZERO_SPEED.baseUnitMagnitude());
+            set(PivotConstants.MOTOR_ZERO_SPEED);
           }
         },
         () -> {
-          set(PivotConstants.MOTOR_ZERO_SPEED.baseUnitMagnitude());
+          set(PivotConstants.MOTOR_ZERO_SPEED);
         },
         pivot);
   }
 
   @Override
   public double getMeasurement() {
-    // Return the process variable measurement here
-    return getEncoderinRadians();
+    return getPosition().baseUnitMagnitude();
   }
 
     public Measure<Angle> getPosition() {

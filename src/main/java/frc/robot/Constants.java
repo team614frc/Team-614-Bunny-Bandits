@@ -51,8 +51,9 @@ public final class Constants {
     public static final Measure<Mass> PIVOT_WEIGHT = Kilogram.of(9.55);
     public static final Measure<Velocity<Angle>> MOTOR_ZERO_SPEED = RPM.of(0);
     public static final Measure<Current> MOTOR_CURRENT_LIMIT = Amp.of(40);
-    public static final double PIVOT_MAX = -92;
-    public static final double PIVOT_MIN = 3;
+    public static final double GEAR_RATIO = 60;
+    public static final Measure<Angle> PIVOT_MAX = Degrees.of(-92);
+    public static final Measure<Angle> PIVOT_MIN = Degrees.of(3);
   }
 
   public static final class DrivebaseConstants {

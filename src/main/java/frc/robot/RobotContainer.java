@@ -20,6 +20,11 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.PivotSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
+
+import static edu.wpi.first.units.Units.Degrees;
+import static edu.wpi.first.units.Units.RPM;
+import static edu.wpi.first.units.Units.Radians;
+
 import java.io.File;
 
 /**
@@ -73,8 +78,8 @@ public class RobotContainer {
    */
   private void configureBindings() {
     
-    driverXbox.a().whileTrue(pivotSubsystem.PivotDown(pivotSubsystem, 0.75, -0.1));
-    driverXbox.x().whileTrue(pivotSubsystem.PivotUp(pivotSubsystem,0.75));
+    driverXbox.a().whileTrue(pivotSubsystem.PivotDown(pivotSubsystem, RPM.of(0.75), Degrees.of(-6)));
+    driverXbox.x().whileTrue(pivotSubsystem.PivotUp(pivotSubsystem, RPM.of(0.75)));
   driverXbox
         .b()
         .whileTrue(
