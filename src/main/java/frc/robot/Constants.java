@@ -12,6 +12,7 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.units.Distance;
 import edu.wpi.first.units.Mass;
 import edu.wpi.first.units.Angle;
+import edu.wpi.first.units.Current;
 import edu.wpi.first.units.Measure;
 import edu.wpi.first.units.Time;
 import edu.wpi.first.units.Velocity;
@@ -48,10 +49,10 @@ public final class Constants {
     public static final Measure<Velocity<Angle>> PIVOT_MAX_VEL = RPM.of(4);
     public static final Measure<Velocity<Velocity<Distance>>> PIVOT_MAX_ACCEL = MetersPerSecondPerSecond.of(20);
     public static final Measure<Mass> PIVOT_WEIGHT = Kilogram.of(9.55);
-    public static final double MOTOR_ZERO_SPEED = 0;
-    public static final int MOTOR_CURRENT_LIMIT = 40;
-    public static final double PIVOT_MAX = -(Math.PI / 2) - 0.02;
-    public static final double PIVOT_MIN = 0.08;
+    public static final Measure<Velocity<Angle>> MOTOR_ZERO_SPEED = RPM.of(0);
+    public static final Measure<Current> MOTOR_CURRENT_LIMIT = Amp.of(40);
+    public static final double PIVOT_MAX = -92;
+    public static final double PIVOT_MIN = 3;
   }
 
   public static final class DrivebaseConstants {

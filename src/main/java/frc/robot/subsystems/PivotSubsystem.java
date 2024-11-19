@@ -43,7 +43,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
             new TrapezoidProfile.Constraints(
                 PivotConstants.PIVOT_MAX_VEL.baseUnitMagnitude(), PivotConstants.PIVOT_MAX_ACCEL.baseUnitMagnitude())));
 
-    pivotMotor.setSmartCurrentLimit(PivotConstants.MOTOR_CURRENT_LIMIT);
+    pivotMotor.setSmartCurrentLimit((int)(PivotConstants.MOTOR_CURRENT_LIMIT.baseUnitMagnitude()));
     pivotMotor.setIdleMode(CANSparkFlex.IdleMode.kBrake);
     pivotMotor.getEncoder().setPosition(0);
     pivotMotor.setInverted(true);
@@ -74,11 +74,11 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
             set(pivotSpeed);
             SmartDashboard.putNumber("Encoder Position in Command", getPivotEncoder());
           } else {
-            set(PivotConstants.MOTOR_ZERO_SPEED);
+            set(PivotConstants.MOTOR_ZERO_SPEED.baseUnitMagnitude());
           }
         },
         () -> {
-          set(PivotConstants.MOTOR_ZERO_SPEED);
+          set(PivotConstants.MOTOR_ZERO_SPEED.baseUnitMagnitude());
         },
         pivot);
   }
@@ -90,11 +90,11 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
             set(pivotSpeed);
             SmartDashboard.putNumber("Encoder Position in Command", getPivotEncoder());
           } else {
-            set(PivotConstants.MOTOR_ZERO_SPEED);
+            set(PivotConstants.MOTOR_ZERO_SPEED.baseUnitMagnitude());
           }
         },
         () -> {
-          set(PivotConstants.MOTOR_ZERO_SPEED);
+          set(PivotConstants.MOTOR_ZERO_SPEED.baseUnitMagnitude());
         },
         pivot);
   }
