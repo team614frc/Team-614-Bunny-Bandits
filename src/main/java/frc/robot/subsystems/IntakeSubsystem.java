@@ -14,7 +14,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase {
-  private final CANSparkFlex intakeMotor = new CANSparkFlex(Constants.IntakeConstants.INTAKE_MOTOR, MotorType.kBrushless);
+  private final CANSparkFlex intakeMotor =
+      new CANSparkFlex(Constants.IntakeConstants.INTAKE_MOTOR, MotorType.kBrushless);
 
   public IntakeSubsystem() {
     intakeMotor.setSmartCurrentLimit((int) (Constants.IntakeConstants.MOTOR_CURRENT_LIMIT.in(Amp)));
@@ -35,7 +36,6 @@ public class IntakeSubsystem extends SubsystemBase {
   public void set(double speed) {
     intakeMotor.set(speed);
   }
-
 
   public Command intakeBucket(IntakeSubsystem intake, double intakeSpeed, boolean isIntake) {
     return Commands.runEnd(

@@ -90,10 +90,10 @@ public class RobotContainer {
     driverXbox.leftBumper().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
     driverXbox
         .leftTrigger()
-        .whileTrue(intake.intakeBucket(intake, Constants.IntakeConstants.INTAKE_SPEED,true));
+        .whileTrue(intake.intakeBucket(intake, Constants.IntakeConstants.INTAKE_SPEED, true));
     driverXbox
         .rightTrigger()
-        .whileTrue(intake.intakeBucket(intake, Constants.IntakeConstants.OUTTAKE_SPEED,false));
+        .whileTrue(intake.intakeBucket(intake, Constants.IntakeConstants.OUTTAKE_SPEED, false));
     driverXbox.rightBumper().onTrue(Commands.none());
     drivebase.setDefaultCommand(
         !RobotBase.isSimulation()
