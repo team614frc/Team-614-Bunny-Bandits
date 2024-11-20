@@ -17,7 +17,6 @@ public class IntakeSubsystem extends SubsystemBase {
   CANSparkFlex intakeMotor;
 
   public IntakeSubsystem() {
-    intakeMotor = new CANSparkFlex(Constants.IntakeConstants.INTAKE_MOTOR, MotorType.kBrushless);
     // shooterMotor.restoreFactoryDefaults();
     intakeMotor.setSmartCurrentLimit((int) (Constants.IntakeConstants.MOTOR_CURRENT_LIMIT.in(Amp)));
     intakeMotor.setIdleMode(CANSparkFlex.IdleMode.kCoast);
