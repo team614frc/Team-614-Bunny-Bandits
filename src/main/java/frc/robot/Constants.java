@@ -57,8 +57,8 @@ public final class Constants {
   public static class IntakeConstants {
     public static final int INTAKE_MOTOR = 19;
     public static final Measure<Current> MOTOR_CURRENT_LIMIT = Amp.of(40);
-    public static final double OUTTAKE_SPEED = -0.5;
-    public static final double INTAKE_SPEED = 0.75;
+    public static final double OUTTAKE_SPEED = 0.4;
+    public static final double INTAKE_SPEED = -0.4;
     public static final double INTAKE_REST_SPEED = 0;
   }
 }

@@ -39,6 +39,7 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeMotor.set(speed);
   }
 
+  
   public Command intakeBucket(IntakeSubsystem intake, double intakeSpeed) {
     return Commands.runEnd(
         () -> {

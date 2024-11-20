@@ -1,0 +1,69 @@
+﻿﻿﻿﻿﻿﻿﻿  ﻿
+﻿﻿﻿﻿﻿﻿ CommandScheduler loop overrun ﻿
+﻿﻿﻿﻿﻿﻿﻿﻿Warning ﻿﻿ 1 ﻿﻿ Joystick Button 1 on port 0 not available, check if controller is plugged in ﻿﻿ edu.wpi.first.wpilibj.DriverStation.reportJoystickUnplugged﻿Warning﻿(DriverStation.java:1364) ﻿﻿﻿
+﻿﻿﻿﻿﻿﻿ ﻿Warning﻿ at edu.wpi.first.wpilibj.DriverStation.reportJoystickUnplugged﻿Warning﻿(DriverStation.java:1364): Joystick Button 1 on port 0 not available, check if controller is plugged in ﻿
+﻿﻿﻿﻿﻿﻿﻿﻿Warning ﻿﻿ 1 ﻿﻿ Loop time of 0.02s overrun
+ ﻿﻿ edu.wpi.first.wpilibj.IterativeRobotBase.printLoopOverrunMessage(IterativeRobotBase.java:412) ﻿﻿﻿
+﻿﻿﻿﻿﻿﻿ ﻿Warning﻿ at edu.wpi.first.wpilibj.IterativeRobotBase.printLoopOverrunMessage(IterativeRobotBase.java:412): Loop time of 0.02s overrun ﻿
+﻿﻿﻿﻿﻿﻿  ﻿
+﻿﻿﻿﻿﻿﻿ CommandScheduler loop overrun ﻿
+﻿﻿﻿﻿﻿﻿﻿﻿Warning ﻿﻿ 1 ﻿﻿ 	IntakeSubsystem.periodic(): 0.000019s
+	SwerveSubsystem.periodic(): 0.000018s
+	buttons.run(): 0.000111s
+ ﻿﻿ edu.wpi.first.wpilibj.Tracer.lambda$printEpochs$0(Tracer.java:62) ﻿﻿﻿
+﻿﻿﻿﻿﻿﻿ ﻿Warning﻿ at edu.wpi.first.wpilibj.Tracer.lambda$printEpochs$0(Tracer.java:62): 	IntakeSubsystem.periodic(): 0.000019s ﻿
+﻿﻿﻿﻿﻿﻿ 	SwerveSubsystem.periodic(): 0.000018s ﻿
+﻿﻿﻿﻿﻿﻿ 	buttons.run(): 0.000111s ﻿
+﻿﻿﻿﻿﻿﻿  ﻿
+﻿﻿﻿﻿﻿﻿﻿﻿Warning ﻿﻿ 1 ﻿﻿ 	SmartDashboard.updateValues(): 0.000798s
+	robotPeriodic(): 0.006474s
+	LiveWindow.updateValues(): 0.000000s
+	Shuffleboard.update(): 0.000018s
+	disabledPeriodic(): 0.038844s
+ ﻿﻿ edu.wpi.first.wpilibj.Tracer.lambda$printEpochs$0(Tracer.java:62) ﻿﻿﻿
+﻿﻿﻿﻿﻿﻿ ﻿Warning﻿ at edu.wpi.first.wpilibj.Tracer.lambda$printEpochs$0(Tracer.java:62): 	SmartDashboard.updateValues(): 0.000798s ﻿
+﻿﻿﻿﻿﻿﻿ 	robotPeriodic(): 0.006474s ﻿
+﻿﻿﻿﻿﻿﻿ 	LiveWindow.updateValues(): 0.000000s ﻿
+﻿﻿﻿﻿﻿﻿ 	Shuffleboard.update(): 0.000018s ﻿
+﻿﻿﻿﻿﻿﻿ 	disabledPeriodic(): 0.038844s ﻿
+﻿﻿﻿﻿﻿﻿  ﻿
+﻿﻿﻿﻿﻿﻿ CommandScheduler loop overrun ﻿
+﻿﻿﻿﻿﻿﻿ CommandScheduler loop overrun ﻿
+﻿﻿﻿﻿﻿﻿﻿﻿Warning ﻿﻿ 1 ﻿﻿ Joystick Button 1 on port 0 not available, check if controller is plugged in ﻿﻿ edu.wpi.first.wpilibj.DriverStation.reportJoystickUnplugged﻿Warning﻿(DriverStation.java:1364) ﻿﻿﻿
+﻿﻿﻿﻿﻿﻿ ﻿Warning﻿ at edu.wpi.first.wpilibj.DriverStation.reportJoystickUnplugged﻿Warning﻿(DriverStation.java:1364): Joystick Button 1 on port 0 not available, check if controller is plugged in ﻿
+﻿﻿﻿﻿﻿﻿ CommandScheduler loop overrun ﻿
+﻿﻿﻿﻿﻿﻿﻿﻿Warning ﻿﻿ 1 ﻿﻿ Loop time of 0.02s overrun
+ ﻿﻿ edu.wpi.first.wpilibj.IterativeRobotBase.printLoopOverrunMessage(IterativeRobotBase.java:412) ﻿﻿﻿
+﻿﻿﻿﻿﻿﻿ ﻿Warning﻿ at edu.wpi.first.wpilibj.IterativeRobotBase.printLoopOverrunMessage(IterativeRobotBase.java:412): Loop time of 0.02s overrun ﻿
+﻿﻿﻿﻿﻿﻿  ﻿
+﻿﻿﻿﻿﻿﻿﻿﻿Warning ﻿﻿ 1 ﻿﻿ Joystick Button 1 on port 0 not available, check if controller is plugged in ﻿﻿ edu.wpi.first.wpilibj.DriverStation.reportJoystickUnplugged﻿Warning﻿(DriverStation.java:1364) ﻿﻿﻿
+﻿﻿﻿﻿﻿﻿ ﻿Warning﻿ at edu.wpi.first.wpilibj.DriverStation.reportJoystickUnplugged﻿Warning﻿(DriverStation.java:1364): Joystick Button 1 on port 0 not available, check if controller is plugged in ﻿
+﻿﻿﻿﻿﻿﻿ CommandScheduler loop overrun ﻿
+﻿﻿﻿﻿﻿﻿﻿﻿Warning ﻿﻿ 1 ﻿﻿ 	IntakeSubsystem.periodic(): 0.000056s
+	SwerveSubsystem.periodic(): 0.000037s
+	buttons.run(): 0.000964s
+ ﻿﻿ edu.wpi.first.wpilibj.Tracer.lambda$printEpochs$0(Tracer.java:62) ﻿﻿﻿
+﻿﻿﻿﻿﻿﻿ ﻿Warning﻿ at edu.wpi.first.wpilibj.Tracer.lambda$printEpochs$0(Tracer.java:62): 	IntakeSubsystem.periodic(): 0.000056s ﻿
+﻿﻿﻿﻿﻿﻿ 	SwerveSubsystem.periodic(): 0.000037s ﻿
+﻿﻿﻿﻿﻿﻿ 	buttons.run(): 0.000964s ﻿
+﻿﻿﻿﻿﻿﻿  ﻿
+﻿﻿﻿﻿﻿﻿﻿﻿Warning ﻿﻿ 1 ﻿﻿ 	SmartDashboard.updateValues(): 0.000463s
+	robotPeriodic(): 0.008014s
+	LiveWindow.updateValues(): 0.000019s
+	Shuffleboard.update(): 0.000000s
+	disabledPeriodic(): 0.039307s
+ ﻿﻿ edu.wpi.first.wpilibj.Tracer.lambda$printEpochs$0(Tracer.java:62) ﻿﻿﻿
+﻿﻿﻿﻿﻿﻿ ﻿Warning﻿ at edu.wpi.first.wpilibj.Tracer.lambda$printEpochs$0(Tracer.java:62): 	SmartDashboard.updateValues(): 0.000463s ﻿
+﻿﻿﻿﻿﻿﻿ 	robotPeriodic(): 0.008014s ﻿
+﻿﻿﻿﻿﻿﻿ 	LiveWindow.updateValues(): 0.000019s ﻿
+﻿﻿﻿﻿﻿﻿ 	Shuffleboard.update(): 0.000000s ﻿
+﻿﻿﻿﻿﻿﻿ 	disabledPeriodic(): 0.039307s ﻿
+﻿﻿﻿﻿﻿﻿  ﻿
+﻿﻿﻿﻿﻿﻿ CommandScheduler loop overrun ﻿
+﻿﻿﻿﻿﻿﻿﻿﻿Warning ﻿﻿ 44004 ﻿﻿ FRC: The Driver Station has lost communication with the robot. ﻿﻿ Driver Station ﻿﻿﻿
+﻿﻿﻿﻿﻿﻿﻿﻿Warning ﻿﻿ 0 ﻿﻿  ﻿﻿  ﻿﻿﻿
+﻿﻿﻿﻿﻿﻿ 0 files downloaded to C:\Users\Public\Documents\FRC\Log Files\WPILogs ﻿
+﻿﻿﻿﻿﻿﻿﻿﻿Warning ﻿﻿ 0 ﻿﻿  ﻿﻿  ﻿﻿﻿
+﻿﻿﻿﻿﻿﻿ 0 files downloaded to C:\Users\Public\Documents\FRC\Log Files\WPILogs ﻿
+﻿﻿﻿﻿﻿﻿﻿﻿Warning ﻿﻿ 0 ﻿﻿  ﻿﻿  ﻿﻿﻿
+﻿﻿﻿﻿﻿﻿ 0 files downloaded to C:\Users\Public\Documents\FRC\Log Files\WPILogs ﻿
