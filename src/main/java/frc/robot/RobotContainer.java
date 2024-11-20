@@ -38,12 +38,7 @@ public class RobotContainer {
   private final SwerveSubsystem drivebase =
       new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve"));
   private final IntakeSubsystem intake = new IntakeSubsystem();
-  // Applies deadbands and inverts controls because joysticks
-  // are back-right positive while robot
-  // controls are front-left positive
-  // left stick controls translation
-  // right stick controls the angular velocity of the robot
-
+  
   // Applies deadbands and inverts controls because joysticks are back-right positive while robot
   // controls are front-left positive left stick controls translation right stick controls the
   // angular velocity of the robot
@@ -90,10 +85,10 @@ public class RobotContainer {
     driverXbox.leftBumper().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
     driverXbox
         .leftTrigger()
-        .whileTrue(intake.intakeBucket(intake, Constants.IntakeConstants.INTAKE_SPEED, true));
+        .whileTrue(intake.intakeBucket(intake, Constants.IntakeConstants.INTAKE_SPEED,true));
     driverXbox
         .rightTrigger()
-        .whileTrue(intake.intakeBucket(intake, Constants.IntakeConstants.OUTTAKE_SPEED, false));
+        .whileTrue(intake.intakeBucket(intake, Constants.IntakeConstants.OUTTAKE_SPEED,false));
     driverXbox.rightBumper().onTrue(Commands.none());
     drivebase.setDefaultCommand(
         !RobotBase.isSimulation()
