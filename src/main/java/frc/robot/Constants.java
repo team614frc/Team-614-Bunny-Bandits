@@ -4,9 +4,16 @@
 
 package frc.robot;
 
+import static edu.wpi.first.units.Units.Amp;
+import static edu.wpi.first.units.Units.RPM;
+
 import com.pathplanner.lib.config.PIDConstants;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.units.Angle;
+import edu.wpi.first.units.Current;
+import edu.wpi.first.units.Measure;
+import edu.wpi.first.units.Velocity;
 import swervelib.math.Matter;
 
 /**
@@ -50,29 +57,12 @@ public final class Constants {
     public static final double TURN_CONSTANT = 6;
   }
 
-  public static class ManipulatorConstants {
+  public static class IntakeConstants {
     public static final int SHOOTER_MOTOR = 19;
-    public static final int MOTOR_CURRENT_LIMIT = 40;
-    public static final double SHOOT_MAX_VEL_SET = 6630.0;
-    public static final double SCORE_AMP_SPEED = 2000;
-    public static final double SCORE_SIMPLE = 0.8;
-    public static final double SCORE_SIMPLE_RPM = 5000;
-    public static final double SCORE_INPLACE_BABY_RPM = 1000;
-    public static final double SCORE_INPLACE_TEEN_RPM = 1500;
-    public static final double FEEDER_SHOT_RPM = 4500;
-    public static final double SHOOTER_kFF = 0.000082;
-    public static final double SHOOTER_kP = 0.00045;
-    public static final double OUTTAKE_SPEED = -0.5;
-    public static final double INTAKE_SPEED = 0.75;
-    public static final double INTAKE_REST_SPEED = 0.00;
+    public static final Measure<Current>  MOTOR_CURRENT_LIMIT = Amp.of(40);
+    public static final Measure<Velocity<Angle>> OUTTAKE_SPEED = RPM.of(-0.5);
+    public static final Measure<Velocity<Angle>> INTAKE_SPEED = RPM.of(0.75);
+    public static final Measure<Velocity<Angle>> INTAKE_REST_SPEED = RPM.of(0);
     public static final double SHOOTER_THRESHOLD = 150;
-    public static final double PUKE_SPEED = -1;
-    public static final double TRAP_SPEED = 1900;
-    public static final double LOADBACK_SPEED = -0.08; // MAYBE BACK AND FORTH WAS THE MOVE
-    public static final double LOADING_SPEED = 1; // (Note fixed its deformity)
-    public static final double AMP_LOAD = 0.5;
-    public static final double RUMBLE_TIMER = 2;
-    public static final double RUMBLE_SETTING = .6;
-
   }
 }
