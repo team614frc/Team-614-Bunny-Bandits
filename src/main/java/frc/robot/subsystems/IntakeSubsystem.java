@@ -29,9 +29,6 @@ public class IntakeSubsystem extends SubsystemBase {
     super.periodic();
   }
 
-  public double getVelocity() {
-    return intakeMotor.getEncoder().getVelocity();
-  }
 
   public void set(double speed) {
     intakeMotor.set(speed);
