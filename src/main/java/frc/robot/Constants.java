@@ -5,15 +5,11 @@
 package frc.robot;
 
 import static edu.wpi.first.units.Units.Amp;
-import static edu.wpi.first.units.Units.RPM;
-
 import com.pathplanner.lib.config.PIDConstants;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.units.Angle;
 import edu.wpi.first.units.Current;
 import edu.wpi.first.units.Measure;
-import edu.wpi.first.units.Velocity;
 import swervelib.math.Matter;
 
 /**
@@ -58,11 +54,10 @@ public final class Constants {
   }
 
   public static class IntakeConstants {
-    public static final int SHOOTER_MOTOR = 19;
+    public static final int INTAKE_MOTOR = 19;
     public static final Measure<Current>  MOTOR_CURRENT_LIMIT = Amp.of(40);
-    public static final Measure<Velocity<Angle>> OUTTAKE_SPEED = RPM.of(-0.5);
-    public static final Measure<Velocity<Angle>> INTAKE_SPEED = RPM.of(0.75);
-    public static final Measure<Velocity<Angle>> INTAKE_REST_SPEED = RPM.of(0);
-    public static final double SHOOTER_THRESHOLD = 150;
+    public static final double OUTTAKE_SPEED = -0.5;
+    public static final double INTAKE_SPEED = 0.75;
+    public static final double INTAKE_REST_SPEED = 0;
   }
 }
