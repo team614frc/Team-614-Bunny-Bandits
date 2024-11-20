@@ -5,6 +5,7 @@
 package frc.robot;
 
 import static edu.wpi.first.units.Units.Amp;
+
 import com.pathplanner.lib.config.PIDConstants;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
@@ -55,7 +56,7 @@ public final class Constants {
 
   public static class IntakeConstants {
     public static final int INTAKE_MOTOR = 19;
-    public static final Measure<Current>  MOTOR_CURRENT_LIMIT = Amp.of(40);
+    public static final Measure<Current> MOTOR_CURRENT_LIMIT = Amp.of(40);
     public static final double OUTTAKE_SPEED = -0.5;
     public static final double INTAKE_SPEED = 0.75;
     public static final double INTAKE_REST_SPEED = 0;
