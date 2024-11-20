@@ -29,7 +29,6 @@ public class IntakeSubsystem extends SubsystemBase {
     super.periodic();
   }
 
-
   public void set(double speed) {
     intakeMotor.set(speed);
   }
