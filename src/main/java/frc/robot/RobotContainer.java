@@ -88,7 +88,7 @@ public class RobotContainer {
         .whileTrue(intake.intakeBucket(intake, Constants.IntakeConstants.INTAKE_SPEED, true));
     driverXbox
         .rightTrigger()
-        .whileTrue(intake.intakeBucket(intake, Constants.IntakeConstants.OUTTAKE_SPEED,false));
+        .whileTrue(intake.intakeBucket(intake, Constants.IntakeConstants.OUTTAKE_SPEED, false));
     driverXbox.rightBumper().onTrue(Commands.none());
     drivebase.setDefaultCommand(
         !RobotBase.isSimulation()
