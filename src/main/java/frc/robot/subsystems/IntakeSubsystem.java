@@ -14,11 +14,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase {
-  /** Creates a new ShooterSubsystem. */
   CANSparkFlex intakeMotor;
 
   public IntakeSubsystem() {
-    intakeMotor = new CANSparkFlex(Constants.IntakeConstants.INTAKE_MOTOR, MotorType.kBrushless);
     // shooterMotor.restoreFactoryDefaults();
     intakeMotor.setSmartCurrentLimit((int) (Constants.IntakeConstants.MOTOR_CURRENT_LIMIT.in(Amp)));
     intakeMotor.setIdleMode(CANSparkFlex.IdleMode.kCoast);
