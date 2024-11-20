@@ -9,8 +9,11 @@ import static edu.wpi.first.units.Units.*;
 import com.pathplanner.lib.config.PIDConstants;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.units.Current;
+import edu.wpi.first.units.Distance;
+import edu.wpi.first.units.Mass;
 import edu.wpi.first.units.Measure;
+import edu.wpi.first.units.Time;
+import edu.wpi.first.units.Velocity;
 import swervelib.math.Matter;
 
 /**
@@ -22,32 +25,27 @@ import swervelib.math.Matter;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-
-  public static final double ROBOT_MASS = (148 - 20.3) * 0.453592; // 32lbs * kg per pound
+  public static final Measure<Mass> ROBOT_MASS = Pounds.of(125);
   public static final Matter CHASSIS =
-      new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS);
-  public static final double LOOP_TIME = 0.13; // s, 20ms + 110ms sprk max velocity lag
-  public static final double MAX_SPEED = Units.feetToMeters(14.5);
-
-  // Maximum speed of the robot in meters per second, used to limit acceleration.
+      new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS.in(Kilogram));
+  public static final Measure<Time> LOOP_TIME =
+      Seconds.of(0.13); // s, 20ms + 110ms sprk max velocity lag
+  public static final Measure<Velocity<Distance>> MAX_SPEED = FeetPerSecond.of(14.5);
 
   public static final class AutoConstants {
-
     public static final PIDConstants TRANSLATION_PID = new PIDConstants(0.7, 0, 0);
     public static final PIDConstants ANGLE_PID = new PIDConstants(0.4, 0, 0.01);
   }
 
   public static final class DrivebaseConstants {
-
-    // Hold time on motor brakes when disabled
-    public static final double WHEEL_LOCK_TIME = 10; // seconds
+    // Hold time on motor brakes when disabled.
+    public static final Measure<Time> WHEEL_LOCK_TIME = Seconds.of(10);
   }
 
   public static class OperatorConstants {
+    public static final int DRIVER_CONTROLLER_PORT = 0;
 
-    public static final int kDriverControllerPort = 0;
-
-    // Joystick Deadband
+    // Joystick deadband.
     public static final double LEFT_X_DEADBAND = 0.1;
     public static final double LEFT_Y_DEADBAND = 0.1;
     public static final double RIGHT_X_DEADBAND = 0.1;

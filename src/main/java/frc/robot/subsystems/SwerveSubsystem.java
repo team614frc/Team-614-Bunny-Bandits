@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import static edu.wpi.first.units.Units.*;
+
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.config.PIDConstants;
@@ -48,49 +50,38 @@ public class SwerveSubsystem extends SubsystemBase {
    * @param directory Directory of swerve drive config files.
    */
   public SwerveSubsystem(File directory) {
-    // Angle conversion factor is 360 / (GEAR RATIO * ENCODER RESOLUTION)
-    //  In this case the gear ratio is 12.8 motor revolutions per wheel rotation.
-    //  The encoder resolution per motor revolution is 1 per motor revolution.
-    double angleConversionFactor = SwerveMath.calculateDegreesPerSteeringRotation(12.8);
-    // Motor conversion factor is (PI * WHEEL DIAMETER IN METERS) / (GEAR RATIO * ENCODER
-    // RESOLUTION).
-    //  In this case the wheel diameter is 4 inches, which must be converted to meters to get
-    // meters/second.
-    //  The gear ratio is 6.75 motor revolutions per wheel rotation.
-    //  The encoder resolution per motor revolution is 1 per motor revolution.
-    double driveConversionFactor =
-        SwerveMath.calculateMetersPerRotation(Units.inchesToMeters(4), 6.75);
-    System.out.println("\"conversionFactors\": {");
-    System.out.println("\t\"angle\": {\"factor\": " + angleConversionFactor + " },");
-    System.out.println("\t\"drive\": {\"factor\": " + driveConversionFactor + " }");
-    System.out.println("}");
-
     // Configure the Telemetry before creating the SwerveDrive to avoid unnecessary objects being
     // created.
     SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
     try {
-      swerveDrive = new SwerveParser(directory).createSwerveDrive(Constants.MAX_SPEED);
+      swerveDrive =
+          new SwerveParser(directory).createSwerveDrive(Constants.MAX_SPEED.in(MetersPerSecond));
       // Alternative method if you don't want to supply the conversion factor via JSON files.
       // swerveDrive = new SwerveParser(directory).createSwerveDrive(maximumSpeed,
       // angleConversionFactor, driveConversionFactor);
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
-    swerveDrive.setHeadingCorrection(
-        false); // Heading correction should only be used while controlling the robot via angle.
-    swerveDrive.setCosineCompensator(
-        false); // !SwerveDriveTelemetry.isSimulation); // Disables cosine compensation for
-    // simulations since it causes discrepancies not seen in real life.
-    swerveDrive.setAngularVelocityCompensation(
-        true, true,
-        0.1); // Correct for skew that gets worse as angular velocity increases. Start with a
-    // coefficient of 0.1.
-    swerveDrive.setModuleEncoderAutoSynchronize(
-        false, 1); // Enable if you want to resynchronize your absolute encoders and motor encoders
-    // periodically when they are not moving.
-    swerveDrive
-        .pushOffsetsToEncoders(); // Set the absolute encoder to be used over the internal encoder
-    // and push the offsets onto it. Throws warning if not possible
+
+    // Heading correction should only be used while controlling the robot via angle.
+    swerveDrive.setHeadingCorrection(false);
+
+    // Disables cosine compensation for simulations since it causes discrepancies not seen in real
+    // life.
+    swerveDrive.setCosineCompensator(!SwerveDriveTelemetry.isSimulation);
+
+    // Correct for skew that gets worse as angular velocity increases. Start with a coefficient of
+    // 0.1.
+    swerveDrive.setAngularVelocityCompensation(true, true, 0.1);
+
+    // Enable if you want to resynchronize your absolute encoders and motor encoders periodically
+    // when they are not moving.
+    swerveDrive.setModuleEncoderAutoSynchronize(false, 1);
+
+    // Set the absolute encoder to be used over the internal encoder and push the offsets onto it.
+    // Throws warning if not possible.
+    swerveDrive.pushOffsetsToEncoders();
+
     setupPathPlanner();
   }
 
@@ -102,7 +93,7 @@ public class SwerveSubsystem extends SubsystemBase {
    */
   public SwerveSubsystem(
       SwerveDriveConfiguration driveCfg, SwerveControllerConfiguration controllerCfg) {
-    swerveDrive = new SwerveDrive(driveCfg, controllerCfg, Constants.MAX_SPEED);
+    swerveDrive = new SwerveDrive(driveCfg, controllerCfg, Constants.MAX_SPEED.in(MetersPerSecond));
   }
 
   @Override
@@ -199,8 +190,8 @@ public class SwerveSubsystem extends SubsystemBase {
       DoubleSupplier translationY,
       DoubleSupplier headingX,
       DoubleSupplier headingY) {
-    // swerveDrive.setHeadingCorrection(true); // Normally you would want heading correction for
-    // this kind of control.
+    // Normally you would want heading correction for this kind of control.
+    // swerveDrive.setHeadingCorrection(true);
     return run(
         () -> {
           Translation2d scaledInputs =
@@ -229,8 +220,8 @@ public class SwerveSubsystem extends SubsystemBase {
    */
   public Command simDriveCommand(
       DoubleSupplier translationX, DoubleSupplier translationY, DoubleSupplier rotation) {
-    // swerveDrive.setHeadingCorrection(true); // Normally you would want heading correction for
-    // this kind of control.
+    // Normally you would want heading correction for this kind of control.
+    // swerveDrive.setHeadingCorrection(true);
     return run(
         () -> {
           // Make the robot move
@@ -498,7 +489,7 @@ public class SwerveSubsystem extends SubsystemBase {
         headingX,
         headingY,
         getHeading().getRadians(),
-        Constants.MAX_SPEED);
+        Constants.MAX_SPEED.in(MetersPerSecond));
   }
 
   /**
@@ -518,7 +509,7 @@ public class SwerveSubsystem extends SubsystemBase {
         scaledInputs.getY(),
         angle.getRadians(),
         getHeading().getRadians(),
-        Constants.MAX_SPEED);
+        Constants.MAX_SPEED.in(MetersPerSecond));
   }
 
   /**

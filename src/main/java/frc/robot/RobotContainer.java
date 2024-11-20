@@ -32,7 +32,8 @@ public class RobotContainer {
 
   private final SendableChooser<Command> autoChooser;
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  final CommandXboxController driverXbox = new CommandXboxController(0);
+  final CommandXboxController driverXbox =
+      new CommandXboxController(OperatorConstants.DRIVER_CONTROLLER_PORT);
   // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem drivebase =
       new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve"));
@@ -42,6 +43,10 @@ public class RobotContainer {
   // controls are front-left positive
   // left stick controls translation
   // right stick controls the angular velocity of the robot
+
+  // Applies deadbands and inverts controls because joysticks are back-right positive while robot
+  // controls are front-left positive left stick controls translation right stick controls the
+  // angular velocity of the robot
   Command driveFieldOrientedAnglularVelocity =
       drivebase.driveCommand(
           () -> MathUtil.applyDeadband(-driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
