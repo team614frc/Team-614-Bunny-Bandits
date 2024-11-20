@@ -59,6 +59,6 @@ public final class Constants {
     public static final Measure<Current> MOTOR_CURRENT_LIMIT = Amp.of(40);
     public static final double OUTTAKE_SPEED = 0.4;
     public static final double INTAKE_SPEED = -0.4;
-    public static final double INTAKE_REST_SPEED = 0;
+    public static final double INTAKE_REST_SPEED = -0.1;
   }
 }
