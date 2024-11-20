@@ -37,13 +37,13 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
 
-  public Command intakeBucket(IntakeSubsystem intake, double intakeSpeed) {
+  public Command intakeBucket(IntakeSubsystem intake, double intakeSpeed, boolean isIntake) {
     return Commands.runEnd(
         () -> {
           intake.set(intakeSpeed);
         },
         () -> {
-          set(Constants.IntakeConstants.INTAKE_REST_SPEED);
+          set(isIntake ? Constants.IntakeConstants.INTAKE_REST_SPEED : 0);
         },
         intake);
   }
