@@ -6,9 +6,6 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -73,13 +70,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
-    driverXbox
-        .b()
-        .whileTrue(
-            Commands.deferredProxy(
-                () ->
-                    drivebase.driveToPose(
-                        new Pose2d(new Translation2d(4, 4), Rotation2d.fromDegrees(0)))));
+    driverXbox.b().onTrue(Commands.none());
     driverXbox.start().whileTrue(Commands.none());
     driverXbox.back().whileTrue(Commands.none());
     driverXbox.leftBumper().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
