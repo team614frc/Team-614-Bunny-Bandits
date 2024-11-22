@@ -77,8 +77,8 @@ public class RobotContainer {
 
     driverXbox
         .a()
-        .whileTrue(pivotSubsystem.PivotDown(pivotSubsystem, RPM.of(0.75), Degrees.of(-6)));
-    driverXbox.x().whileTrue(pivotSubsystem.PivotUp(pivotSubsystem, RPM.of(0.75)));
+        .whileTrue(pivotSubsystem.PivotDown(pivotSubsystem, 0.75, Degrees.of(-6)));
+    driverXbox.x().whileTrue(pivotSubsystem.PivotUp(pivotSubsystem, 0.75));
     driverXbox
         .b()
         .whileTrue(

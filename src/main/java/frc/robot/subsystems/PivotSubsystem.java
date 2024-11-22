@@ -8,14 +8,12 @@ import static edu.wpi.first.units.Units.Amps;
 import static edu.wpi.first.units.Units.Degree;
 import static edu.wpi.first.units.Units.Degrees;
 import static edu.wpi.first.units.Units.Radians;
-
 import com.revrobotics.CANSparkFlex;
 import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.units.Angle;
 import edu.wpi.first.units.Measure;
-import edu.wpi.first.units.Velocity;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -48,10 +46,10 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
             PivotConstants.PIVOT_kI,
             PivotConstants.PIVOT_kD,
             new TrapezoidProfile.Constraints(
-                PivotConstants.PIVOT_MAX_VEL.in(RadiansPerSecond),
-                PivotConstants.PIVOT_MAX_ACCEL.in(RadiansPerSecond))));
+                PivotConstants.PIVOT_MAX_VEL,
+                PivotConstants.PIVOT_MAX_ACCEL)));
 
-    pivotMotor.setSmartCurrentLimit((int) (PivotConstants.MOTOR_CURRENT_LIMIT.of(Amps)));
+    pivotMotor.setSmartCurrentLimit((int) (PivotConstants.MOTOR_CURRENT_LIMIT.in(Amps)));
     pivotMotor.setIdleMode(CANSparkFlex.IdleMode.kBrake);
     pivotMotor.getEncoder().setPosition(0);
     pivotMotor.setInverted(true);
@@ -67,8 +65,8 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     pivotMotor.set(output + getController().calculate(getMeasurement() + feed));
   }
 
-  public boolean atGoal(Measure<Radians> goal, Measure<Radians> threshold) {
-    return Math.abs(getMeasurement() - goal) < threshold;
+  public boolean atGoal(Measure<Angle> goal, Measure<Angle> threshold) {
+    return Math.abs(getMeasurement() - goal.in(Radians)) < threshold.in(Radians);
   }
 
   public void set(double speed) {
@@ -76,7 +74,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
   }
 
   public Command PivotDown(
-      PivotSubsystem pivot, Measure<Velocity<Angle>> pivotSpeed, Measure<Angle> set) {
+      PivotSubsystem pivot, double pivotSpeed, Measure<Angle> set) {
     return Commands.runEnd(
         () -> {
           if (getPosition().baseUnitMagnitude() < set.baseUnitMagnitude()) {
@@ -93,7 +91,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
         pivot);
   }
 
-  public Command PivotUp(PivotSubsystem pivot, Measure<Velocity<Angle>> pivotSpeed) {
+  public Command PivotUp(PivotSubsystem pivot, double pivotSpeed) {
     return Commands.runEnd(
         () -> {
           if (Math.abs(getPosition().baseUnitMagnitude())
