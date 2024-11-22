@@ -76,10 +76,10 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     pivotMotor.set(speed);
   }
 
-  public Command PivotDown(PivotSubsystem pivot, double pivotSpeed, Measure<Angle> set) {
+  public Command PivotDown(PivotSubsystem pivot, double pivotSpeed, Measure<Angle> pivotMin) {
     return Commands.runEnd(
         () -> {
-          if (getPosition().in(Degrees) < set.in(Degrees)) {
+          if (getPosition().baseUnitMagnitude() < pivotMin.baseUnitMagnitude()) {
             set(pivotSpeed);
             SmartDashboard.putNumber("Encoder Position in Command", getPosition().in(Degree));
           } else {
