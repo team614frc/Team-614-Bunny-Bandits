@@ -68,8 +68,8 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     return Math.abs(getMeasurement() - goal) < threshold;
   }
 
-  public void set(Measure<Velocity<Angle>> speed) {
-    pivotMotor.set(speed.baseUnitMagnitude());
+  public void set(double speed) {
+    pivotMotor.set(speed);
   }
 
   public Command PivotDown(
