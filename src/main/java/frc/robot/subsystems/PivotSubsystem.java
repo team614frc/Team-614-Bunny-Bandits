@@ -48,7 +48,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
                 PivotConstants.PIVOT_MAX_VEL.baseUnitMagnitude(),
                 PivotConstants.PIVOT_MAX_ACCEL.baseUnitMagnitude())));
 
-    pivotMotor.setSmartCurrentLimit((int) (PivotConstants.MOTOR_CURRENT_LIMIT.baseUnitMagnitude()));
+    pivotMotor.setSmartCurrentLimit((int) (PivotConstants.MOTOR_CURRENT_LIMIT.of(Amps)));
     pivotMotor.setIdleMode(CANSparkFlex.IdleMode.kBrake);
     pivotMotor.getEncoder().setPosition(0);
     pivotMotor.setInverted(true);
