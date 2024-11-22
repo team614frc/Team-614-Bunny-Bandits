@@ -46,16 +46,15 @@ public final class Constants {
     public static final double PIVOT_kV = 0;
     public static final double PIVOT_kA = 0;
     public static final int PIVOT_MOTOR = 20;
-    public static final double PIVOT_MAX_VEL = 4;
-    public static final double PIVOT_MAX_ACCEL = 20;
+    public static final Measure<Velocity<Angle>> PIVOT_MAX_VEL = RadiansPerSecond.of(4);
+    public static final Measure<Velocity<Velocity<Angle>>> PIVOT_MAX_ACCEL = RadiansPerSecond.per(Second).of(20);
     public static final Measure<Mass> PIVOT_WEIGHT = Kilogram.of(9.55);
-    public static final double PIVOT_MOTOR_SPEED = 0.75;
+    public static final double PIVOT_MOTOR_SPEED = 0.15;
     public static final double PIVOT_REST_SPEED = 0;
     public static final Measure<Current> MOTOR_CURRENT_LIMIT = Amp.of(40);
-    public static final double MOTOR_ZERO_SPEED = 0;
     public static final double GEAR_RATIO = 60;
-    public static final Measure<Angle> PIVOT_MAX = Degrees.of(-92);
-    public static final Measure<Angle> PIVOT_MIN = Degrees.of(3);
+    public static final Measure<Angle> PIVOT_MAX = Degrees.of(0);
+    public static final Measure<Angle> PIVOT_MIN = Degrees.of(-60);
   }
 
   public static final class DrivebaseConstants {

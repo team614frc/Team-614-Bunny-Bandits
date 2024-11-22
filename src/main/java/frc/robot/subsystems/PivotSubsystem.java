@@ -83,11 +83,11 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
             set(pivotSpeed);
             SmartDashboard.putNumber("Encoder Position in Command", getPosition().in(Degree));
           } else {
-            set(PivotConstants.MOTOR_ZERO_SPEED);
+            set(PivotConstants.PIVOT_REST_SPEED);
           }
         },
         () -> {
-          set(PivotConstants.MOTOR_ZERO_SPEED);
+          set(PivotConstants.PIVOT_REST_SPEED);
         },
         pivot);
   }
@@ -99,11 +99,11 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
             set(pivotSpeed);
             SmartDashboard.putNumber("Pivot Position (Degrees)", getPosition().in(Degrees));
           } else {
-            set(PivotConstants.MOTOR_ZERO_SPEED);
+            set(PivotConstants.PIVOT_REST_SPEED);
           }
         },
         () -> {
-          set(PivotConstants.MOTOR_ZERO_SPEED);
+          set(PivotConstants.PIVOT_REST_SPEED);
         },
         pivot);
   }
