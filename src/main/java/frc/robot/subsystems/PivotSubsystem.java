@@ -97,7 +97,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
               < PivotConstants.PIVOT_MAX.baseUnitMagnitude()) {
             set(pivotSpeed);
             SmartDashboard.putNumber(
-                "Encoder Position in Command", getPosition().baseUnitMagnitude());
+                "Pivot Position (Degrees)", getPosition().in(Degrees));
           } else {
             set(PivotConstants.MOTOR_ZERO_SPEED);
           }
