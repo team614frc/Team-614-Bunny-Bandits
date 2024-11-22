@@ -76,7 +76,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     pivotMotor.set(speed);
   }
 
-  public Command PivotDown(PivotSubsystem pivot, double pivotSpeed, Measure<Angle> set) {
+  public Command PivotDown(PivotSubsystem pivot, double pivotSpeed, Measure<Angle> pivotMin) {
     return Commands.runEnd(
         () -> {
           if (getPosition().baseUnitMagnitude() < set.baseUnitMagnitude()) {
