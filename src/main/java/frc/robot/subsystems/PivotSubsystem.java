@@ -9,6 +9,8 @@ import static edu.wpi.first.units.Units.Degree;
 import static edu.wpi.first.units.Units.Degrees;
 import static edu.wpi.first.units.Units.Radians;
 import com.revrobotics.CANSparkFlex;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+
 import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
@@ -18,6 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ProfiledPIDSubsystem;
+import frc.robot.Constants;
 import frc.robot.Constants.PivotConstants;
 
 /**
@@ -29,7 +32,7 @@ import frc.robot.Constants.PivotConstants;
  * @returns pivotPosition through the getPosition()
  */
 public class PivotSubsystem extends ProfiledPIDSubsystem {
-  private CANSparkFlex pivotMotor;
+  private final CANSparkFlex pivotMotor = new CANSparkFlex(Constants.PivotConstants.PIVOT_MOTOR, MotorType.kBrushless);
 
   private ArmFeedforward feedforward =
       new ArmFeedforward(
@@ -80,7 +83,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
           if (getPosition().baseUnitMagnitude() < set.baseUnitMagnitude()) {
             set(pivotSpeed);
             SmartDashboard.putNumber(
-                "Encoder Position in Command", getPosition().baseUnitMagnitude());
+                "Encoder Position in Command", getPosition().in(Degree));
           } else {
             set(PivotConstants.MOTOR_ZERO_SPEED);
           }
