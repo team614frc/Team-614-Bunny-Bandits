@@ -48,8 +48,8 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
             PivotConstants.PIVOT_kI,
             PivotConstants.PIVOT_kD,
             new TrapezoidProfile.Constraints(
-                PivotConstants.PIVOT_MAX_VEL.baseUnitMagnitude(),
-                PivotConstants.PIVOT_MAX_ACCEL.baseUnitMagnitude())));
+                PivotConstants.PIVOT_MAX_VEL.in(RadiansPerSecond),
+                PivotConstants.PIVOT_MAX_ACCEL.in(RadiansPerSecond))));
 
     pivotMotor.setSmartCurrentLimit((int) (PivotConstants.MOTOR_CURRENT_LIMIT.of(Amps)));
     pivotMotor.setIdleMode(CANSparkFlex.IdleMode.kBrake);
@@ -67,12 +67,12 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     pivotMotor.set(output + getController().calculate(getMeasurement() + feed));
   }
 
-  public boolean atGoal(double goal, double threshold) {
+  public boolean atGoal(Measure<Radians> goal, Measure<Radians> threshold) {
     return Math.abs(getMeasurement() - goal) < threshold;
   }
 
-  public void set(Measure<Velocity<Angle>> speed) {
-    pivotMotor.set(speed.baseUnitMagnitude());
+  public void set(double speed) {
+    pivotMotor.set(speed);
   }
 
   public Command PivotDown(
