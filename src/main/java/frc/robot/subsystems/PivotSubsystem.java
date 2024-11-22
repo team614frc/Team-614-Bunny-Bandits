@@ -64,7 +64,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     pivotMotor.set(output + getController().calculate(getMeasurement() + feed));
   }
 
-  public boolean atGoal(double goal, double threshold) {
+  public boolean atGoal(Measure<Radians> goal, Measure<Radians> threshold) {
     return Math.abs(getMeasurement() - goal) < threshold;
   }
 
