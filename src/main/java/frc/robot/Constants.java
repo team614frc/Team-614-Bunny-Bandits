@@ -46,11 +46,11 @@ public final class Constants {
     public static final double PIVOT_kV = 0;
     public static final double PIVOT_kA = 0;
     public static final int PIVOT_MOTOR = 20;
-    public static final Measure<Velocity<Angle>> PIVOT_MAX_VEL = RPM.of(4);
-    public static final Measure<Velocity<Velocity<Angle>>> PIVOT_MAX_ACCEL =
+    public static final Measure<Velocity<Angle>> PIVOT_MAX_VEL = RadiansPerSecond.of(4);
+    public static final Measure<Velocity<Velocity<Distance>>> PIVOT_MAX_ACCEL =
         MetersPerSecondPerSecond.of(20);
     public static final Measure<Mass> PIVOT_WEIGHT = Kilogram.of(9.55);
-    public static final Measure<Velocity<Angle>> MOTOR_ZERO_SPEED = RPM.of(0);
+    public static final Measure<Velocity<Angle>> MOTOR_ZERO_SPEED = RadiansPerSecond.of(0);
     public static final Measure<Current> MOTOR_CURRENT_LIMIT = Amp.of(40);
     public static final double GEAR_RATIO = 60;
     public static final Measure<Angle> PIVOT_MAX = Degrees.of(-92);
