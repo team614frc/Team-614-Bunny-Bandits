@@ -8,9 +8,9 @@ import static edu.wpi.first.units.Units.Amps;
 import static edu.wpi.first.units.Units.Degree;
 import static edu.wpi.first.units.Units.Degrees;
 import static edu.wpi.first.units.Units.Radians;
+
 import com.revrobotics.CANSparkFlex;
 import com.revrobotics.CANSparkLowLevel.MotorType;
-
 import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
@@ -32,7 +32,8 @@ import frc.robot.Constants.PivotConstants;
  * @returns pivotPosition through the getPosition()
  */
 public class PivotSubsystem extends ProfiledPIDSubsystem {
-  private final CANSparkFlex pivotMotor = new CANSparkFlex(Constants.PivotConstants.PIVOT_MOTOR, MotorType.kBrushless);
+  private final CANSparkFlex pivotMotor =
+      new CANSparkFlex(Constants.PivotConstants.PIVOT_MOTOR, MotorType.kBrushless);
 
   private ArmFeedforward feedforward =
       new ArmFeedforward(
@@ -49,8 +50,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
             PivotConstants.PIVOT_kI,
             PivotConstants.PIVOT_kD,
             new TrapezoidProfile.Constraints(
-                PivotConstants.PIVOT_MAX_VEL,
-                PivotConstants.PIVOT_MAX_ACCEL)));
+                PivotConstants.PIVOT_MAX_VEL, PivotConstants.PIVOT_MAX_ACCEL)));
 
     pivotMotor.setSmartCurrentLimit((int) (PivotConstants.MOTOR_CURRENT_LIMIT.in(Amps)));
     pivotMotor.setIdleMode(CANSparkFlex.IdleMode.kBrake);
@@ -76,14 +76,12 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     pivotMotor.set(speed);
   }
 
-  public Command PivotDown(
-      PivotSubsystem pivot, double pivotSpeed, Measure<Angle> set) {
+  public Command PivotDown(PivotSubsystem pivot, double pivotSpeed, Measure<Angle> set) {
     return Commands.runEnd(
         () -> {
           if (getPosition().baseUnitMagnitude() < set.baseUnitMagnitude()) {
             set(pivotSpeed);
-            SmartDashboard.putNumber(
-                "Encoder Position in Command", getPosition().in(Degree));
+            SmartDashboard.putNumber("Encoder Position in Command", getPosition().in(Degree));
           } else {
             set(PivotConstants.MOTOR_ZERO_SPEED);
           }
@@ -100,8 +98,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
           if (Math.abs(getPosition().baseUnitMagnitude())
               < PivotConstants.PIVOT_MAX.baseUnitMagnitude()) {
             set(pivotSpeed);
-            SmartDashboard.putNumber(
-                "Pivot Position (Degrees)", getPosition().in(Degrees));
+            SmartDashboard.putNumber("Pivot Position (Degrees)", getPosition().in(Degrees));
           } else {
             set(PivotConstants.MOTOR_ZERO_SPEED);
           }

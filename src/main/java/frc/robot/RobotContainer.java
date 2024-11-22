@@ -77,9 +77,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
 
-    driverXbox
-        .a()
-        .whileTrue(pivotSubsystem.PivotDown(pivotSubsystem, 0.75, Degrees.of(-6)));
+    driverXbox.a().whileTrue(pivotSubsystem.PivotDown(pivotSubsystem, 0.75, Degrees.of(-6)));
     driverXbox.x().whileTrue(pivotSubsystem.PivotUp(pivotSubsystem, 0.75));
     driverXbox
         .b()
