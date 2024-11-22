@@ -9,6 +9,7 @@ import static edu.wpi.first.units.Units.*;
 import com.pathplanner.lib.config.PIDConstants;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.units.Current;
 import edu.wpi.first.units.Distance;
 import edu.wpi.first.units.Mass;
 import edu.wpi.first.units.Measure;
@@ -50,5 +51,13 @@ public final class Constants {
     public static final double LEFT_Y_DEADBAND = 0.1;
     public static final double RIGHT_X_DEADBAND = 0.1;
     public static final double TURN_CONSTANT = 6;
+  }
+
+  public static class IntakeConstants {
+    public static final int INTAKE_MOTOR = 19;
+    public static final Measure<Current> MOTOR_CURRENT_LIMIT = Amp.of(40);
+    public static final double OUTTAKE_SPEED = 0.4;
+    public static final double INTAKE_SPEED = -0.4;
+    public static final double INTAKE_REST_SPEED = -0.1;
   }
 }

@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 import java.io.File;
 
@@ -33,6 +34,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem drivebase =
       new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve"));
+  private final IntakeSubsystem intake = new IntakeSubsystem();
 
   // Applies deadbands and inverts controls because joysticks are back-right positive while robot
   // controls are front-left positive left stick controls translation right stick controls the
@@ -71,7 +73,13 @@ public class RobotContainer {
     driverXbox.b().onTrue(Commands.none());
     driverXbox.start().whileTrue(Commands.none());
     driverXbox.back().whileTrue(Commands.none());
-    driverXbox.leftBumper().onTrue(Commands.none());
+    driverXbox.leftBumper().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
+    driverXbox
+        .leftTrigger()
+        .whileTrue(intake.intakeBucket(intake, Constants.IntakeConstants.INTAKE_SPEED, true));
+    driverXbox
+        .rightTrigger()
+        .whileTrue(intake.intakeBucket(intake, Constants.IntakeConstants.OUTTAKE_SPEED, false));
     driverXbox.rightBumper().onTrue(Commands.none());
     drivebase.setDefaultCommand(
         !RobotBase.isSimulation()
