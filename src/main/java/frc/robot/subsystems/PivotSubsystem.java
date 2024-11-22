@@ -79,7 +79,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
   public Command PivotDown(PivotSubsystem pivot, double pivotSpeed, Measure<Angle> pivotMin) {
     return Commands.runEnd(
         () -> {
-          if (getPosition().in(Degrees) < pivotMin.in(Degrees)) {
+          if (getPosition().in(Degrees) > pivotMin.in(Degrees)) {
             set(pivotSpeed);
             SmartDashboard.putNumber("Encoder Position in Command", getPosition().in(Degree));
           } else {
@@ -95,8 +95,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
   public Command PivotUp(PivotSubsystem pivot, double pivotSpeed) {
     return Commands.runEnd(
         () -> {
-          if (Math.abs(getPosition().baseUnitMagnitude())
-              < PivotConstants.PIVOT_MAX.baseUnitMagnitude()) {
+          if (Math.abs(getPosition().in(Degrees)) < PivotConstants.PIVOT_MAX.in(Degrees)) {
             set(pivotSpeed);
             SmartDashboard.putNumber("Pivot Position (Degrees)", getPosition().in(Degrees));
           } else {

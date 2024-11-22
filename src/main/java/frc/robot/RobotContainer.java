@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import static edu.wpi.first.units.Units.*;
-
 import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -77,8 +75,17 @@ public class RobotContainer {
    */
   private void configureBindings() {
 
-    driverXbox.a().whileTrue(pivotSubsystem.PivotDown(pivotSubsystem, 0.75, Degrees.of(-6)));
-    driverXbox.x().whileTrue(pivotSubsystem.PivotUp(pivotSubsystem, 0.75));
+    driverXbox
+        .a()
+        .whileTrue(
+            pivotSubsystem.PivotDown(
+                pivotSubsystem,
+                Constants.PivotConstants.PIVOT_MOTOR_SPEED,
+                Constants.PivotConstants.PIVOT_MIN));
+    driverXbox
+        .x()
+        .whileTrue(
+            pivotSubsystem.PivotUp(pivotSubsystem, Constants.PivotConstants.PIVOT_MOTOR_SPEED));
     driverXbox
         .b()
         .whileTrue(

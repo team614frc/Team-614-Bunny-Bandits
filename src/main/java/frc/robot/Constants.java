@@ -49,6 +49,7 @@ public final class Constants {
     public static final double PIVOT_MAX_VEL = 4;
     public static final double PIVOT_MAX_ACCEL = 20;
     public static final Measure<Mass> PIVOT_WEIGHT = Kilogram.of(9.55);
+    public static final double PIVOT_MOTOR_SPEED = 0.75;
     public static final double PIVOT_REST_SPEED = 0;
     public static final Measure<Current> MOTOR_CURRENT_LIMIT = Amp.of(40);
     public static final double MOTOR_ZERO_SPEED = 0;
