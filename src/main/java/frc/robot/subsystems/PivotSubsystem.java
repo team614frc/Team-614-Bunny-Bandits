@@ -110,7 +110,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
 
   @Override
   public double getMeasurement() {
-    return getPosition().baseUnitMagnitude();
+    return getPosition().in(Radians);
   }
 
   public Measure<Angle> getPosition() {
