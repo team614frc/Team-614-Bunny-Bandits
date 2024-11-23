@@ -23,9 +23,7 @@ import edu.wpi.first.wpilibj2.command.ProfiledPIDSubsystem;
 import frc.robot.Constants;
 import frc.robot.Constants.PivotConstants;
 
-/**
- * The PivotSubsystem has the motor objects for the motors of the Pivot on the robot. It also sets
- * them a value based on the input received from a command.
+/* them a value based on the input received from a command.
  *
  * @param pivotSpeed Variable represents the speed passed from a command that pivot motors should be
  *     set to
@@ -57,8 +55,6 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     pivotMotor.getEncoder().setPosition(0);
     pivotMotor.setInverted(true);
     pivotMotor.burnFlash();
-
-    SmartDashboard.putNumber("Pivot Height", getMeasurement());
   }
 
   @Override
@@ -117,7 +113,6 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     return getPosition().in(Radians);
   }
 
-  
   public Measure<Angle> getPosition() {
     var position = pivotMotor.getEncoder().getPosition();
     return Degree.of(position / PivotConstants.GEAR_RATIO / 360);

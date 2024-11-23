@@ -82,10 +82,7 @@ public class RobotContainer {
                 pivot,
                 Constants.PivotConstants.PIVOT_MOTOR_SPEED,
                 Constants.PivotConstants.PIVOT_MIN));
-    driverXbox
-        .x()
-        .whileTrue(
-            pivot.PivotUp(pivot, Constants.PivotConstants.PIVOT_MOTOR_SPEED));
+    driverXbox.x().whileTrue(pivot.PivotUp(pivot, Constants.PivotConstants.PIVOT_MOTOR_SPEED));
     driverXbox
         .b()
         .whileTrue(
