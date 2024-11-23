@@ -40,7 +40,7 @@ public class RobotContainer {
       new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve"));
   private final IntakeSubsystem intake = new IntakeSubsystem();
 
-  private final PivotSubsystem pivotSubsystem = new PivotSubsystem();
+  private final PivotSubsystem pivot = new PivotSubsystem();
   // Applies deadbands and inverts controls because joysticks are back-right positive while robot
   // controls are front-left positive left stick controls translation right stick controls the
   // angular velocity of the robot
@@ -78,14 +78,14 @@ public class RobotContainer {
     driverXbox
         .a()
         .whileTrue(
-            pivotSubsystem.PivotDown(
-                pivotSubsystem,
+            pivot.PivotDown(
+                pivot,
                 Constants.PivotConstants.PIVOT_MOTOR_SPEED,
                 Constants.PivotConstants.PIVOT_MIN));
     driverXbox
         .x()
         .whileTrue(
-            pivotSubsystem.PivotUp(pivotSubsystem, Constants.PivotConstants.PIVOT_MOTOR_SPEED));
+            pivot.PivotUp(pivot, Constants.PivotConstants.PIVOT_MOTOR_SPEED));
     driverXbox
         .b()
         .whileTrue(

@@ -80,6 +80,8 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     return Commands.runEnd(
         () -> {
           if (getPosition().in(Degrees) > pivotMin.in(Degrees)) {
+            pivot.setGoal(pivotMin.in(Radians));
+            pivot.enable();
             set(pivotSpeed);
             SmartDashboard.putNumber("Encoder Position in Command", getPosition().in(Degree));
           } else {
@@ -96,6 +98,8 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     return Commands.runEnd(
         () -> {
           if (getPosition().in(Degrees) < PivotConstants.PIVOT_MAX.in(Degrees)) {
+            pivot.setGoal(PivotConstants.PIVOT_MAX.in(Degrees));
+            pivot.enable();
             set(pivotSpeed);
             SmartDashboard.putNumber("Pivot Position (Degrees)", getPosition().in(Degrees));
           } else {
@@ -113,6 +117,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     return getPosition().in(Radians);
   }
 
+  
   public Measure<Angle> getPosition() {
     var position = pivotMotor.getEncoder().getPosition();
     return Degree.of(position / PivotConstants.GEAR_RATIO / 360);
