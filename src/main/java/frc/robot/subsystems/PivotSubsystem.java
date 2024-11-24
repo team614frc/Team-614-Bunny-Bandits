@@ -94,7 +94,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     return Commands.runEnd(
         () -> {
           if (getPosition().in(Degrees) < PivotConstants.PIVOT_MAX.in(Degrees)) {
-            pivot.setGoal(PivotConstants.PIVOT_MAX.in(Degrees));
+            pivot.setGoal(PivotConstants.PIVOT_MAX.in(Radians));
             pivot.enable();
             set(pivotSpeed);
             SmartDashboard.putNumber("Pivot Position (Degrees)", getPosition().in(Degrees));
