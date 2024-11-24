@@ -6,7 +6,6 @@ package frc.robot;
 
 import static edu.wpi.first.units.Units.*;
 
-import com.pathplanner.lib.config.PIDConstants;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.units.Angle;
@@ -35,14 +34,11 @@ public final class Constants {
   public static final Measure<Velocity<Distance>> MAX_SPEED = FeetPerSecond.of(14.5);
 
   public static final class PivotConstants {
-    public static final double VORTEX_ENCODER_TICKS_PER_REVOLUTION = 7168;
-    public static final PIDConstants TRANSLATION_PID = new PIDConstants(0.7, 0, 0);
-    public static final PIDConstants ANGLE_PID = new PIDConstants(0.4, 0, 0.01);
     public static final double PIVOT_kP = 0;
     public static final double PIVOT_kI = 0;
     public static final double PIVOT_kD = 0;
     public static final double PIVOT_kS = 0;
-    public static final double PIVOT_kG = 0;
+    public static final double PIVOT_kG = 0.000001;
     public static final double PIVOT_kV = 0;
     public static final double PIVOT_kA = 0;
     public static final int PIVOT_MOTOR = 20;
@@ -55,7 +51,7 @@ public final class Constants {
     public static final Measure<Current> MOTOR_CURRENT_LIMIT = Amp.of(40);
     public static final double GEAR_RATIO = 60;
     public static final Measure<Angle> PIVOT_MAX = Degrees.of(0);
-    public static final Measure<Angle> PIVOT_MIN = Degrees.of(-60);
+    public static final Measure<Angle> PIVOT_MIN = Degrees.of(-7.8);
   }
 
   public static final class DrivebaseConstants {
