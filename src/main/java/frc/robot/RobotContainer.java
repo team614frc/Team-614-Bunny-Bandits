@@ -5,6 +5,8 @@
 package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -58,6 +60,10 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    NamedCommands.registerCommand("Pivot Up", pivot.pivotUp());
+    NamedCommands.registerCommand("Pivot Down", pivot.pivotDown());
+    NamedCommands.registerCommand("Intake", intake.intakeBucket());
+    NamedCommands.registerCommand("Outtake", intake.outtakeBucket());
     // Configure the trigger bindings
     configureBindings();
     autoChooser = AutoBuilder.buildAutoChooser();
@@ -78,8 +84,8 @@ public class RobotContainer {
     driverXbox
         .a()
         .onTrue(
-            pivot.PivotDown());
-    driverXbox.x().onTrue(pivot.PivotUp());
+            pivot.pivotDown());
+    driverXbox.x().onTrue(pivot.pivotUp());
     driverXbox
         .b()
         .whileTrue(
@@ -92,12 +98,12 @@ public class RobotContainer {
     driverXbox.leftBumper().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
     driverXbox
         .leftTrigger()
-        .whileTrue(intake.intakeBucket(intake, Constants.IntakeConstants.INTAKE_SPEED, true));
+        .whileTrue(intake.intakeBucket());
     driverXbox
         .rightTrigger()
-        .whileTrue(intake.intakeBucket(intake, Constants.IntakeConstants.OUTTAKE_SPEED, false));
+        .whileTrue(intake.outtakeBucket());
     driverXbox.rightBumper().onTrue(Commands.none());
-    drivebase.setDefaultCommand(
+    drivebase.setDefaultCommand( 
         !RobotBase.isSimulation()
             ? driveFieldOrientedAnglularVelocity
             : driveFieldOrientedDirectAngleSim);

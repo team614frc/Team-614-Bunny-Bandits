@@ -76,7 +76,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     pivotMotor.set(speed);
   }
 
-  public Command PivotDown() {
+  public Command pivotDown() {
     return Commands.runOnce(
         () -> {
             setGoal(PivotConstants.PIVOT_MIN.in(Degrees));
@@ -85,7 +85,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
         });
   }
 
-  public Command PivotUp() {
+  public Command pivotUp() {
     return Commands.runOnce(
         () -> {
             setGoal(PivotConstants.PIVOT_MAX.in(Degrees));

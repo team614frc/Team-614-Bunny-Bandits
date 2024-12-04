@@ -50,7 +50,7 @@ public final class Constants {
     public static final double PIVOT_REST_SPEED = 0;
     public static final Measure<Current> MOTOR_CURRENT_LIMIT = Amp.of(40);
     public static final double GEAR_RATIO = 60;
-    public static final Measure<Angle> PIVOT_MAX = Degrees.of(10);
+    public static final Measure<Angle> PIVOT_MAX = Degrees.of(20);
     public static final Measure<Angle> PIVOT_MIN = Degrees.of(100);
   }
 
