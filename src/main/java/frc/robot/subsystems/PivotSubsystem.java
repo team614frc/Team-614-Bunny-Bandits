@@ -57,9 +57,6 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     pivotMotor.burnFlash();
   }
 
-
-  
-
   @Override
   public void useOutput(double output, TrapezoidProfile.State setpoint) {
     // Use the output (and optionally the setpoint) here
@@ -79,18 +76,18 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
   public Command pivotDown() {
     return Commands.runOnce(
         () -> {
-            setGoal(PivotConstants.PIVOT_MIN.in(Degrees));
-            enable();
-            SmartDashboard.putNumber("Encoder Position in Command", getPosition().in(Degrees));
+          setGoal(PivotConstants.PIVOT_MIN.in(Degrees));
+          enable();
+          SmartDashboard.putNumber("Encoder Position in Command", getPosition().in(Degrees));
         });
   }
 
   public Command pivotUp() {
     return Commands.runOnce(
         () -> {
-            setGoal(PivotConstants.PIVOT_MAX.in(Degrees));
-            enable();
-            SmartDashboard.putNumber("Pivot Position (Degrees)", getPosition().in(Degrees));
+          setGoal(PivotConstants.PIVOT_MAX.in(Degrees));
+          enable();
+          SmartDashboard.putNumber("Pivot Position (Degrees)", getPosition().in(Degrees));
         });
   }
 
@@ -104,7 +101,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     return Degree.of((position / PivotConstants.GEAR_RATIO) * 360);
   }
 
-  public double getEncoderValues() { //returns pure encoder values
+  public double getEncoderValues() { // returns pure encoder values
     return getPosition().in(Degrees);
   }
 }

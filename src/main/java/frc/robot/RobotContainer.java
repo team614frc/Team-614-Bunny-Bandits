@@ -6,7 +6,6 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -81,10 +80,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
 
-    driverXbox
-        .a()
-        .onTrue(
-            pivot.pivotDown());
+    driverXbox.a().onTrue(pivot.pivotDown());
     driverXbox.x().onTrue(pivot.pivotUp());
     driverXbox
         .b()
@@ -96,14 +92,10 @@ public class RobotContainer {
     driverXbox.start().whileTrue(Commands.none());
     driverXbox.back().whileTrue(Commands.none());
     driverXbox.leftBumper().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
-    driverXbox
-        .leftTrigger()
-        .whileTrue(intake.intakeBucket());
-    driverXbox
-        .rightTrigger()
-        .whileTrue(intake.outtakeBucket());
+    driverXbox.leftTrigger().whileTrue(intake.intakeBucket());
+    driverXbox.rightTrigger().whileTrue(intake.outtakeBucket());
     driverXbox.rightBumper().onTrue(Commands.none());
-    drivebase.setDefaultCommand( 
+    drivebase.setDefaultCommand(
         !RobotBase.isSimulation()
             ? driveFieldOrientedAnglularVelocity
             : driveFieldOrientedDirectAngleSim);
