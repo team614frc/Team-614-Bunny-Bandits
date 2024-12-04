@@ -34,24 +34,24 @@ public final class Constants {
   public static final Measure<Velocity<Distance>> MAX_SPEED = FeetPerSecond.of(14.5);
 
   public static final class PivotConstants {
-    public static final double PIVOT_kP = 0;
+    public static final double PIVOT_kP = 0.064;
     public static final double PIVOT_kI = 0;
     public static final double PIVOT_kD = 0;
     public static final double PIVOT_kS = 0;
-    public static final double PIVOT_kG = 0.000001;
+    public static final double PIVOT_kG = 0;
     public static final double PIVOT_kV = 0;
     public static final double PIVOT_kA = 0;
     public static final int PIVOT_MOTOR = 20;
-    public static final Measure<Velocity<Angle>> PIVOT_MAX_VEL = RadiansPerSecond.of(4);
+    public static final Measure<Velocity<Angle>> PIVOT_MAX_VEL = DegreesPerSecond.of(10000);
     public static final Measure<Velocity<Velocity<Angle>>> PIVOT_MAX_ACCEL =
-        RadiansPerSecond.per(Second).of(20);
+        DegreesPerSecond.per(Second).of(10000);
     public static final Measure<Mass> PIVOT_WEIGHT = Kilogram.of(9.55);
     public static final double PIVOT_MOTOR_SPEED = 0.1;
     public static final double PIVOT_REST_SPEED = 0;
     public static final Measure<Current> MOTOR_CURRENT_LIMIT = Amp.of(40);
     public static final double GEAR_RATIO = 60;
-    public static final Measure<Angle> PIVOT_MAX = Degrees.of(0);
-    public static final Measure<Angle> PIVOT_MIN = Degrees.of(-7.8);
+    public static final Measure<Angle> PIVOT_MAX = Degrees.of(10);
+    public static final Measure<Angle> PIVOT_MIN = Degrees.of(100);
   }
 
   public static final class DrivebaseConstants {

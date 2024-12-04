@@ -53,15 +53,19 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     pivotMotor.setSmartCurrentLimit((int) (PivotConstants.MOTOR_CURRENT_LIMIT.in(Amps)));
     pivotMotor.setIdleMode(CANSparkFlex.IdleMode.kBrake);
     pivotMotor.getEncoder().setPosition(0);
-    pivotMotor.setInverted(true);
+    pivotMotor.setInverted(false);
     pivotMotor.burnFlash();
   }
+
+
+  
 
   @Override
   public void useOutput(double output, TrapezoidProfile.State setpoint) {
     // Use the output (and optionally the setpoint) here
     double feed = feedforward.calculate(setpoint.position, setpoint.velocity);
-    pivotMotor.set(output + getController().calculate(getMeasurement() + feed));
+    pivotMotor.set(output + 0.03); // + feed F = 0.01
+    SmartDashboard.putNumber("Pivot PID output", output);
   }
 
   public boolean atGoal(Measure<Angle> goal, Measure<Angle> threshold) {
@@ -72,49 +76,35 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
     pivotMotor.set(speed);
   }
 
-  public Command PivotDown(PivotSubsystem pivot, double pivotSpeed, Measure<Angle> pivotMin) {
-    return Commands.runEnd(
+  public Command PivotDown() {
+    return Commands.runOnce(
         () -> {
-          if (getPosition().in(Degrees) > pivotMin.in(Degrees)) {
-            pivot.setGoal(pivotMin.in(Radians));
-            pivot.enable();
-            set(pivotSpeed);
-            SmartDashboard.putNumber("Encoder Position in Command", getPosition().in(Degree));
-          } else {
-            set(PivotConstants.PIVOT_REST_SPEED);
-          }
-        },
-        () -> {
-          set(PivotConstants.PIVOT_REST_SPEED);
-        },
-        pivot);
+            setGoal(PivotConstants.PIVOT_MIN.in(Degrees));
+            enable();
+            SmartDashboard.putNumber("Encoder Position in Command", getPosition().in(Degrees));
+        });
   }
 
-  public Command PivotUp(PivotSubsystem pivot, double pivotSpeed) {
-    return Commands.runEnd(
+  public Command PivotUp() {
+    return Commands.runOnce(
         () -> {
-          if (getPosition().in(Degrees) < PivotConstants.PIVOT_MAX.in(Degrees)) {
-            pivot.setGoal(PivotConstants.PIVOT_MAX.in(Radians));
-            pivot.enable();
-            set(pivotSpeed);
+            setGoal(PivotConstants.PIVOT_MAX.in(Degrees));
+            enable();
             SmartDashboard.putNumber("Pivot Position (Degrees)", getPosition().in(Degrees));
-          } else {
-            set(PivotConstants.PIVOT_REST_SPEED);
-          }
-        },
-        () -> {
-          set(PivotConstants.PIVOT_REST_SPEED);
-        },
-        pivot);
+        });
   }
 
   @Override
   public double getMeasurement() {
-    return getPosition().in(Radians);
+    return getPosition().in(Degrees);
   }
 
   public Measure<Angle> getPosition() {
     var position = pivotMotor.getEncoder().getPosition();
-    return Degree.of(position / PivotConstants.GEAR_RATIO / 360);
+    return Degree.of((position / PivotConstants.GEAR_RATIO) * 360);
+  }
+
+  public double getEncoderValues() { //returns pure encoder values
+    return getPosition().in(Degrees);
   }
 }

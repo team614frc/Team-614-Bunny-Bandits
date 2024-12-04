@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import static edu.wpi.first.units.Units.Degrees;
-
 import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -79,12 +77,9 @@ public class RobotContainer {
 
     driverXbox
         .a()
-        .whileTrue(
-            pivot.PivotDown(
-                pivot,
-                Constants.PivotConstants.PIVOT_MOTOR_SPEED,
-                Constants.PivotConstants.PIVOT_MIN));
-    driverXbox.x().whileTrue(pivot.PivotUp(pivot, Constants.PivotConstants.PIVOT_MOTOR_SPEED));
+        .onTrue(
+            pivot.PivotDown());
+    driverXbox.x().onTrue(pivot.PivotUp());
     driverXbox
         .b()
         .whileTrue(
@@ -118,7 +113,7 @@ public class RobotContainer {
   }
 
   public double getPivotEncoder() {
-    return pivot.getPosition().in(Degrees);
+    return pivot.getEncoderValues();
   }
 
   public void setDriveMode() {
