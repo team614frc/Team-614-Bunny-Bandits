@@ -3,17 +3,13 @@
   "robotLength": 0.648,
   "holonomicMode": true,
   "pathFolders": [
-    "5 bucket paths",
-    "Lower 2 Bucket Paths",
-    "Lower 3 Bucket Paths",
-    "Top 2 Bucket Paths",
-    "Top 3 Bucket Paths"
+    "Bucket Paths"
   ],
   "autoFolders": [
     "New Folder"
   ],
   "defaultMaxVel": 3.0,
-  "defaultMaxAccel": 3.0,
+  "defaultMaxAccel": 1.0,
   "defaultMaxAngVel": 540.0,
   "defaultMaxAngAccel": 720.0,
   "robotMass": 74.088,
