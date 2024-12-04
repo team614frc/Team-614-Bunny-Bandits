@@ -5,26 +5,13 @@
     "data": {
       "commands": [
         {
-          "type": "parallel",
+          "type": "sequential",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "5 Bucket Path 1"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "5 Bucket Path 2"
+                  "pathName": "Top 2 Bucket path 1"
                 }
               }
             ]
@@ -37,7 +24,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "5 Bucket Path 3"
+                  "pathName": "Top 2 Bucket Path 2"
                 }
               }
             ]
@@ -50,7 +37,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "5 Bucket Auto 4"
+                  "pathName": "Top 2 Bucket Path 3"
                 }
               }
             ]
@@ -63,7 +50,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "5 Bucket Path 5"
+                  "pathName": "Top 2 Bucket Path 4"
                 }
               }
             ]
@@ -76,7 +63,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "5 Bucket Path 6"
+                  "pathName": "Top 3 Bucket Path"
                 }
               }
             ]
@@ -89,20 +76,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "5 Bucket Auto 7"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "5 Bucket Path 8"
+                  "pathName": "Top 3 Bucket Path 2"
                 }
               }
             ]

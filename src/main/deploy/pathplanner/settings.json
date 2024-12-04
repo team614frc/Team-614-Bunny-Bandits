@@ -2,7 +2,13 @@
   "robotWidth": 0.648,
   "robotLength": 0.648,
   "holonomicMode": true,
-  "pathFolders": [],
+  "pathFolders": [
+    "5 bucket paths",
+    "Lower 2 Bucket Paths",
+    "Lower 3 Bucket Paths",
+    "Top 2 Bucket Paths",
+    "Top 3 Bucket Paths"
+  ],
   "autoFolders": [
     "New Folder"
   ],
