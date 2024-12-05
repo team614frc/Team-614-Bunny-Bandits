@@ -98,7 +98,7 @@ public class PivotSubsystem extends ProfiledPIDSubsystem {
 
   public Measure<Angle> getPosition() {
     var position = pivotMotor.getEncoder().getPosition();
-    return Degree.of((position / PivotConstants.GEAR_RATIO) * 360);
+    return Degree.of(position / PivotConstants.GEAR_RATIO * 360);
   }
 
   public double getEncoderValues() { // returns pure encoder values
