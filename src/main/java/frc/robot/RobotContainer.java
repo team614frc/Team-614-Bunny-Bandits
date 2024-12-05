@@ -53,8 +53,12 @@ public class RobotContainer {
 
   Command driveFieldOrientedAnglularVelocityPrecision =
       drivebase.driveCommand(
-          () -> MathUtil.applyDeadband(-driverXbox.getLeftY() * 0.5, OperatorConstants.LEFT_Y_DEADBAND),
-          () -> MathUtil.applyDeadband(-driverXbox.getLeftX() * 0.5, OperatorConstants.LEFT_X_DEADBAND),
+          () ->
+              MathUtil.applyDeadband(
+                  -driverXbox.getLeftY() * 0.5, OperatorConstants.LEFT_Y_DEADBAND),
+          () ->
+              MathUtil.applyDeadband(
+                  -driverXbox.getLeftX() * 0.5, OperatorConstants.LEFT_X_DEADBAND),
           () -> driverXbox.getRightX() * -1 * 0.5);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -76,7 +80,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     driverXbox.a().onTrue((Commands.none()));
-    driverXbox.b().whileTrue((Commands.none()));
+    driverXbox.b().onTrue((Commands.none()));
     driverXbox.start().onTrue(Commands.runOnce(drivebase::zeroGyro));
     driverXbox.back().whileTrue(Commands.none());
     driverXbox.leftBumper().whileTrue(Commands.none());
