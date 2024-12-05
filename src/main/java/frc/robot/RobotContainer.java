@@ -79,21 +79,17 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-
-    driverXbox.a().onTrue(pivot.pivotDown());
-    driverXbox.x().onTrue(pivot.pivotUp());
-    driverXbox
-        .b()
-        .whileTrue(
-            Commands.deferredProxy(
-                () ->
-                    drivebase.driveToPose(
-                        new Pose2d(new Translation2d(4, 4), Rotation2d.fromDegrees(0)))));
-    driverXbox.start().whileTrue(Commands.none());
+    driverXbox.a().onTrue((Commands.none()));
+    driverXbox.b().onTrue(Commands.none());
+    driverXbox.start().onTrue(Commands.runOnce(drivebase::zeroGyro));
     driverXbox.back().whileTrue(Commands.none());
-    driverXbox.leftBumper().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
-    driverXbox.leftTrigger().whileTrue(intake.intakeBucket());
-    driverXbox.rightTrigger().whileTrue(intake.outtakeBucket());
+    driverXbox.leftBumper().whileTrue(Commands.none());
+    driverXbox
+        .leftTrigger()
+        .whileTrue(intake.intakeBucket(intake, Constants.IntakeConstants.INTAKE_SPEED, true));
+    driverXbox
+        .rightTrigger()
+        .whileTrue(intake.intakeBucket(intake, Constants.IntakeConstants.OUTTAKE_SPEED, false));
     driverXbox.rightBumper().onTrue(Commands.none());
     drivebase.setDefaultCommand(
         !RobotBase.isSimulation()
