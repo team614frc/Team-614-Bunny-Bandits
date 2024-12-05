@@ -51,6 +51,12 @@ public class RobotContainer {
           () -> MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
           () -> driverXbox.getRawAxis(2));
 
+  Command driveFieldOrientedAnglularVelocityPrecision =
+      drivebase.driveCommand(
+          () -> MathUtil.applyDeadband(-driverXbox.getLeftY() * 0.5, OperatorConstants.LEFT_Y_DEADBAND),
+          () -> MathUtil.applyDeadband(-driverXbox.getLeftX() * 0.5, OperatorConstants.LEFT_X_DEADBAND),
+          () -> driverXbox.getRightX() * -1 * 0.5);
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -70,7 +76,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     driverXbox.a().onTrue((Commands.none()));
-    driverXbox.b().onTrue(Commands.none());
+    driverXbox.b().whileTrue((Commands.none()));
     driverXbox.start().onTrue(Commands.runOnce(drivebase::zeroGyro));
     driverXbox.back().whileTrue(Commands.none());
     driverXbox.leftBumper().whileTrue(Commands.none());
@@ -80,7 +86,7 @@ public class RobotContainer {
     driverXbox
         .rightTrigger()
         .whileTrue(intake.intakeBucket(intake, Constants.IntakeConstants.OUTTAKE_SPEED, false));
-    driverXbox.rightBumper().onTrue(Commands.none());
+    driverXbox.rightBumper().whileTrue(driveFieldOrientedAnglularVelocityPrecision);
     drivebase.setDefaultCommand(
         !RobotBase.isSimulation()
             ? driveFieldOrientedAnglularVelocity
