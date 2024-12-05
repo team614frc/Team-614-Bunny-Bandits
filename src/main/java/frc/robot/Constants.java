@@ -6,9 +6,15 @@ package frc.robot;
 
 import static edu.wpi.first.units.Units.*;
 
+<<<<<<< HEAD
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.units.Angle;
+=======
+import com.pathplanner.lib.config.PIDConstants;
+import edu.wpi.first.math.geometry.Translation3d;
+import edu.wpi.first.math.util.Units;
+>>>>>>> Lucas/autos
 import edu.wpi.first.units.Current;
 import edu.wpi.first.units.Distance;
 import edu.wpi.first.units.Mass;
