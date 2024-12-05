@@ -7,9 +7,6 @@ package frc.robot;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -85,12 +82,8 @@ public class RobotContainer {
     driverXbox.start().onTrue(Commands.runOnce(drivebase::zeroGyro));
     driverXbox.back().whileTrue(Commands.none());
     driverXbox.leftBumper().whileTrue(Commands.none());
-    driverXbox
-        .leftTrigger()
-        .whileTrue(intake.intakeBucket());
-    driverXbox
-        .rightTrigger()
-        .whileTrue(intake.outtakeBucket());
+    driverXbox.leftTrigger().whileTrue(intake.intakeBucket());
+    driverXbox.rightTrigger().whileTrue(intake.outtakeBucket());
     driverXbox.rightBumper().onTrue(Commands.none());
     drivebase.setDefaultCommand(
         !RobotBase.isSimulation()
@@ -108,7 +101,7 @@ public class RobotContainer {
   }
 
   public double getPivotEncoder() {
-    return pivot.getEncoderValues();
+    return pivot.getMeasurement();
   }
 
   public void setDriveMode() {
