@@ -71,7 +71,7 @@ public class RobotContainer {
   private void configureBindings() {
     driverXbox.a().onTrue((Commands.none()));
     driverXbox.b().onTrue(Commands.none());
-    driverXbox.start().onTrue((Commands.runOnce(drivebase::zeroGyro)));
+    driverXbox.start().onTrue(Commands.runOnce(drivebase::zeroGyro));
     driverXbox.back().whileTrue(Commands.none());
     driverXbox.leftBumper().whileTrue(Commands.none());
     driverXbox
