@@ -79,17 +79,18 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    driverXbox.a().onTrue((Commands.none()));
+    driverXbox.a().onTrue(pivot.pivotDown());
+    driverXbox.x().onTrue(pivot.pivotUp());
     driverXbox.b().onTrue(Commands.none());
     driverXbox.start().onTrue(Commands.runOnce(drivebase::zeroGyro));
     driverXbox.back().whileTrue(Commands.none());
     driverXbox.leftBumper().whileTrue(Commands.none());
     driverXbox
         .leftTrigger()
-        .whileTrue(intake.intakeBucket(intake, Constants.IntakeConstants.INTAKE_SPEED, true));
+        .whileTrue(intake.intakeBucket());
     driverXbox
         .rightTrigger()
-        .whileTrue(intake.intakeBucket(intake, Constants.IntakeConstants.OUTTAKE_SPEED, false));
+        .whileTrue(intake.outtakeBucket());
     driverXbox.rightBumper().onTrue(Commands.none());
     drivebase.setDefaultCommand(
         !RobotBase.isSimulation()
