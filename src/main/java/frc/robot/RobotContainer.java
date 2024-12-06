@@ -54,6 +54,16 @@ public class RobotContainer {
           () -> MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
           () -> driverXbox.getRawAxis(2));
 
+  Command driveFieldOrientedAnglularVelocityPrecision =
+      drivebase.driveCommand(
+          () ->
+              MathUtil.applyDeadband(
+                  -driverXbox.getLeftY() * 0.5, OperatorConstants.LEFT_Y_DEADBAND),
+          () ->
+              MathUtil.applyDeadband(
+                  -driverXbox.getLeftX() * 0.5, OperatorConstants.LEFT_X_DEADBAND),
+          () -> driverXbox.getRightX() * -1 * 0.5);
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     NamedCommands.registerCommand("Pivot Up", pivot.pivotUp());
@@ -86,14 +96,9 @@ public class RobotContainer {
     driverXbox.start().onTrue(Commands.runOnce(drivebase::zeroGyro));
     driverXbox.back().whileTrue(Commands.none());
     driverXbox.leftBumper().whileTrue(Commands.none());
-    driverXbox
-        .leftTrigger()
-        .whileTrue(
-            intake.intakeBucket());
-    driverXbox
-        .rightTrigger()
-        .whileTrue(intake.outtakeBucket());
-    driverXbox.rightBumper().onTrue(Commands.none());
+    driverXbox.leftTrigger().whileTrue(intake.intakeBucket());
+    driverXbox.rightTrigger().whileTrue(intake.outtakeBucket());
+    driverXbox.rightBumper().whileTrue(driveFieldOrientedAnglularVelocityPrecision);
     drivebase.setDefaultCommand(
         !RobotBase.isSimulation()
             ? driveFieldOrientedAnglularVelocity
