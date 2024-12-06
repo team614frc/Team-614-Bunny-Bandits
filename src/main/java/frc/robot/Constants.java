@@ -51,7 +51,7 @@ public final class Constants {
     public static final Measure<Current> MOTOR_CURRENT_LIMIT = Amp.of(40);
     public static final double GEAR_RATIO = 60;
     public static final Measure<Angle> PIVOT_MAX = Degrees.of(20);
-    public static final Measure<Angle> PIVOT_MIN = Degrees.of(100);
+    public static final Measure<Angle> PIVOT_MIN = Degrees.of(105);
   }
 
   public static final class DrivebaseConstants {
@@ -75,5 +75,9 @@ public final class Constants {
     public static final double OUTTAKE_SPEED = 0.4;
     public static final double INTAKE_SPEED = -0.4;
     public static final double INTAKE_REST_SPEED = -0.1;
+    public static final double OUTTAKE_REST_SPEED = 0;
+    public static final double INTAKE_TIMEOUT = 0.25;
+    public static final double OUTTAKE_TIMEOUT = 0.25;
+    public static final double DROP_TIMEOUT = 0.1;
   }
 }

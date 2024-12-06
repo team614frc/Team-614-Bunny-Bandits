@@ -49,7 +49,7 @@ public class IntakeSubsystem extends SubsystemBase {
           set(Constants.IntakeConstants.OUTTAKE_SPEED);
         },
         () -> {
-          set(0);
+          set(Constants.IntakeConstants.OUTTAKE_REST_SPEED);
         });
   }
 }

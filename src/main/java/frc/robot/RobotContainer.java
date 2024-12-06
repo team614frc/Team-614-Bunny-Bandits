@@ -58,8 +58,12 @@ public class RobotContainer {
   public RobotContainer() {
     NamedCommands.registerCommand("Pivot Up", pivot.pivotUp());
     NamedCommands.registerCommand("Pivot Down", pivot.pivotDown());
-    NamedCommands.registerCommand("Intake", intake.intakeBucket());
-    NamedCommands.registerCommand("Outtake", intake.outtakeBucket());
+    NamedCommands.registerCommand(
+        "Intake",
+        intake.intakeBucket());
+    NamedCommands.registerCommand(
+        "Outtake",
+        intake.outtakeBucket());
     // Configure the trigger bindings
     configureBindings();
     autoChooser = AutoBuilder.buildAutoChooser();
@@ -82,8 +86,13 @@ public class RobotContainer {
     driverXbox.start().onTrue(Commands.runOnce(drivebase::zeroGyro));
     driverXbox.back().whileTrue(Commands.none());
     driverXbox.leftBumper().whileTrue(Commands.none());
-    driverXbox.leftTrigger().whileTrue(intake.intakeBucket());
-    driverXbox.rightTrigger().whileTrue(intake.outtakeBucket());
+    driverXbox
+        .leftTrigger()
+        .whileTrue(
+            intake.intakeBucket());
+    driverXbox
+        .rightTrigger()
+        .whileTrue(intake.outtakeBucket());
     driverXbox.rightBumper().onTrue(Commands.none());
     drivebase.setDefaultCommand(
         !RobotBase.isSimulation()
